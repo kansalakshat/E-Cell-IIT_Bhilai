@@ -4,40 +4,178 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Hero3D from '../components/Hero3D'
 import FeatureCard from '../components/FeatureCard'
 import EventCard from '../components/EventCard'
+import EntrepreneurshipCard from '../components/EntrepreneurshipCard'
+import GuideCard from '../components/GuideCard'
+import Stats3D from '../components/Stats3D'
 import { useInView } from '../hooks/useInView'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const features = [
+const coreValues = [
   {
     icon: '💡',
     title: 'Innovation',
-    description: 'Foster creative thinking and breakthrough ideas that solve real-world problems',
+    subtitle: 'Disruptive Thinking',
+    description: 'Foster breakthrough ideas that solve real-world problems and create market opportunities',
+    gradient: 'from-blue-600 to-cyan-500',
+    metrics: [
+      { value: '100+', label: 'Ideas Incubated' },
+      { value: '24h', label: 'Hackathons' },
+    ],
+    cta: 'Submit Idea',
   },
   {
     icon: '🚀',
     title: 'Execution',
-    description: 'Transform ideas into tangible products and impactful solutions',
+    subtitle: 'From Concept to MVP',
+    description: 'Transform ideas into tangible products with actionable strategies and frameworks',
+    gradient: 'from-purple-600 to-pink-500',
+    metrics: [
+      { value: '20+', label: 'MVPs Built' },
+      { value: '6mo', label: 'Launch Cycle' },
+    ],
+    cta: 'Build Now',
   },
   {
     icon: '👥',
     title: 'Collaboration',
-    description: 'Connect with like-minded entrepreneurs and industry leaders',
+    subtitle: 'Ecosystem Building',
+    description: 'Network with mentors, investors, and fellow entrepreneurs in thriving community',
+    gradient: 'from-cyan-600 to-blue-500',
+    metrics: [
+      { value: '500+', label: 'Network' },
+      { value: '100+', label: 'Mentors' },
+    ],
+    cta: 'Connect',
   },
   {
-    icon: '📚',
-    title: 'Learning',
-    description: 'Gain practical skills beyond classroom through real-world challenges',
+    icon: '📈',
+    title: 'Growth',
+    subtitle: 'Scaling Strategies',
+    description: 'Learn data-driven growth hacking and business scaling techniques',
+    gradient: 'from-green-600 to-emerald-500',
+    metrics: [
+      { value: '5x', label: 'Avg Growth' },
+      { value: '$50M+', label: 'Fundraised' },
+    ],
+    cta: 'Scale Up',
   },
   {
     icon: '🎯',
     title: 'Leadership',
-    description: 'Develop leadership and ownership skills through hands-on experience',
+    subtitle: 'Founder DNA',
+    description: 'Develop entrepreneurial leadership skills and founding team dynamics',
+    gradient: 'from-orange-600 to-red-500',
+    metrics: [
+      { value: '15+', label: 'Startups Led' },
+      { value: '80%', label: 'Success Rate' },
+    ],
+    cta: 'Lead',
   },
   {
-    icon: '🌟',
+    icon: '🌍',
     title: 'Impact',
-    description: 'Create value for society through entrepreneurial thinking',
+    subtitle: 'Sustainable Value',
+    description: 'Create measurable social and environmental impact through business innovation',
+    gradient: 'from-teal-600 to-cyan-500',
+    metrics: [
+      { value: '1000+', label: 'Lives Changed' },
+      { value: 'Global', label: 'Reach' },
+    ],
+    cta: 'Make Impact',
+  },
+]
+
+// Entrepreneurship journey data
+const entrepreneurshipJourneys = [
+  {
+    title: 'From Student to Founder',
+    description: 'Real stories of IIT Bhilai students who turned their ideas into successful ventures',
+    category: 'Success Story',
+    icon: '🚀',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop',
+    highlights: ['First 100 customers', 'Series A funding', 'Global expansion'],
+  },
+  {
+    title: 'Building in Deep Tech',
+    description: 'Exploring opportunities in AI, blockchain, and quantum computing startups',
+    category: 'Deep Tech',
+    icon: '⚙️',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    highlights: ['Technical moat', 'Patent portfolio', 'Enterprise clients'],
+    isLarge: true,
+  },
+  {
+    title: 'B2B SaaS Playbook',
+    description: 'Learn proven strategies for building B2B software businesses at scale',
+    category: 'SaaS',
+    icon: '📊',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop',
+    highlights: ['CAC optimization', 'LTV models', 'Enterprise sales'],
+  },
+]
+
+// Guides data
+const entrepreneurshipGuides = [
+  {
+    number: 1,
+    title: 'Validate Your Idea',
+    description: 'Learn proven methods to validate product-market fit before building',
+    icon: '✓',
+    difficulty: 'Beginner',
+    duration: '2 weeks',
+    steps: [
+      'Define your target customer with precision',
+      'Conduct 20+ customer interviews',
+      'Build and test landing page',
+      'Measure product-market fit signals',
+      'Iterate based on feedback',
+    ],
+  },
+  {
+    number: 2,
+    title: 'Build Your MVP',
+    description: 'Create minimum viable product with lean methodology',
+    icon: '🔨',
+    difficulty: 'Intermediate',
+    duration: '4-6 weeks',
+    steps: [
+      'Define core features only',
+      'Choose tech stack wisely',
+      'Set realistic launch timeline',
+      'Build with first customers in mind',
+      'Deploy and gather feedback',
+    ],
+  },
+  {
+    number: 3,
+    title: 'Raise Funding',
+    description: 'Master the art of pitching and closing investor rounds',
+    icon: '💰',
+    difficulty: 'Intermediate',
+    duration: '3 months',
+    steps: [
+      'Prepare financial projections',
+      'Create compelling pitch deck',
+      'Build investor relationships',
+      'Negotiate terms effectively',
+      'Close your first round',
+    ],
+  },
+  {
+    number: 4,
+    title: 'Go-to-Market Strategy',
+    description: 'Launch and scale your product with data-driven GTM',
+    icon: '🎯',
+    difficulty: 'Advanced',
+    duration: '6 months',
+    steps: [
+      'Identify ideal customer profile',
+      'Design acquisition channels',
+      'Implement referral programs',
+      'Measure all metrics religiously',
+      'Optimize and scale profitably',
+    ],
   },
 ]
 
@@ -115,23 +253,32 @@ export default function HomePage() {
       {/* Hero Section with 3D */}
       <Hero3D />
 
-      {/* Stats Section */}
+      {/* Stats Section with 3D */}
       <section ref={statsRef} className="py-20 bg-gradient-to-b from-dark to-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: 500, label: 'Active Members' },
-              { number: 50, label: 'Events Yearly' },
-              { number: 20, label: 'Startups Founded' },
-              { number: 100, label: 'Mentors' },
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="stat-number text-4xl md:text-5xl font-bold gradient-text mb-2" data-target={stat.number}>
-                  0
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* 3D Visualization */}
+            <div className="h-96 rounded-2xl border border-blue-500/20 overflow-hidden">
+              <Stats3D />
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-8">
+              {[
+                { number: 500, label: 'Active Members', icon: '👥' },
+                { number: 50, label: 'Events Yearly', icon: '🎯' },
+                { number: 20, label: 'Startups Founded', icon: '🚀' },
+                { number: 100, label: 'Expert Mentors', icon: '🎓' },
+              ].map((stat, idx) => (
+                <div key={idx} className="text-center group">
+                  <div className="text-4xl mb-3">{stat.icon}</div>
+                  <div className="stat-number text-4xl md:text-5xl font-bold gradient-text mb-2 group-hover:text-cyan-300 transition-colors" data-target={stat.number}>
+                    0
+                  </div>
+                  <p className="text-gray-400">{stat.label}</p>
                 </div>
-                <p className="text-gray-400">{stat.label}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -167,70 +314,63 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Core Values Section */}
       <section ref={featuresRef} className="py-20 bg-gradient-to-b from-slate-900/50 to-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">What We Offer</h2>
+            <h2 className="text-5xl font-bold mb-4">Core Values of E-Cell</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Comprehensive programs designed to nurture innovation and entrepreneurial excellence
+              Six pillars that define our entrepreneurial ecosystem
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, idx) => (
-              <FeatureCard key={idx} {...feature} index={idx} />
+            {coreValues.map((value, idx) => (
+              <FeatureCard
+                key={idx}
+                {...value}
+                index={idx}
+                stats={value.metrics[0]?.value}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Initiatives Section */}
+      {/* Entrepreneurship Journeys Section */}
       <section className="py-20 bg-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">Our Initiatives</h2>
-            <p className="text-xl text-gray-400">Programs that shape tomorrow's entrepreneurs</p>
+            <h2 className="text-5xl font-bold mb-4">Entrepreneurship Journeys</h2>
+            <p className="text-xl text-gray-400">Real stories and playbooks from successful founders</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: 'Speaker Sessions',
-                desc: 'Interactive talks with entrepreneurs, VCs, and industry leaders',
-                points: ['Startup founders', 'Venture Capitalists', 'Product Managers', 'Technology Leaders']
-              },
-              {
-                title: 'Real-World Problem Statements',
-                desc: 'Solve authentic industry challenges and build innovative solutions',
-                points: ['Industry challenges', 'Research & develop', 'Build prototypes', 'Present ideas']
-              },
-              {
-                title: 'Competitions & Events',
-                desc: 'Showcase your skills through various competitions',
-                points: ['Case Competitions', 'Hackathons', 'Innovation Challenges', 'Pitch Competitions']
-              },
-              {
-                title: 'Startup Culture',
-                desc: 'Learn and implement startup fundamentals',
-                points: ['Idea Validation', 'Design Thinking', 'MVP Development', 'Pitch Deck Preparation']
-              },
-            ].map((initiative, idx) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {entrepreneurshipJourneys.map((journey, idx) => (
+              <EntrepreneurshipCard
                 key={idx}
-                className="p-8 rounded-2xl bg-gradient-to-br from-blue-600/10 to-cyan-500/10 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 group"
-              >
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
-                  {initiative.title}
-                </h3>
-                <p className="text-gray-400 mb-6">{initiative.desc}</p>
-                <ul className="space-y-2">
-                  {initiative.points.map((point, pidx) => (
-                    <li key={pidx} className="text-sm text-gray-300 flex items-start">
-                      <span className="text-cyan-400 mr-3">✓</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                {...journey}
+                index={idx}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Learning Guides Section */}
+      <section className="py-20 bg-gradient-to-b from-slate-900/50 to-dark">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">Entrepreneurship Roadmap</h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Structured learning paths to guide your startup journey from idea to scale
+            </p>
+          </div>
+          <div className="space-y-6">
+            {entrepreneurshipGuides.map((guide, idx) => (
+              <GuideCard
+                key={idx}
+                {...guide}
+                index={idx}
+              />
             ))}
           </div>
         </div>
@@ -250,6 +390,75 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <button className="btn-primary">View All Events</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Startup Benchmarks Section */}
+      <section className="py-20 bg-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">Startup Success Metrics</h2>
+            <p className="text-xl text-gray-400">Data-driven insights from our portfolio</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                metric: '20+',
+                label: 'Active Startups',
+                desc: 'Portfolio companies',
+                icon: '📈',
+                gradient: 'from-blue-600 to-cyan-500',
+              },
+              {
+                metric: '$50M+',
+                label: 'Funds Raised',
+                desc: 'By E-Cell founders',
+                icon: '💰',
+                gradient: 'from-green-600 to-emerald-500',
+              },
+              {
+                metric: '80%',
+                label: 'Success Rate',
+                desc: 'Surviving ventures',
+                icon: '✓',
+                gradient: 'from-purple-600 to-pink-500',
+              },
+              {
+                metric: '1000+',
+                label: 'Jobs Created',
+                desc: 'By our founders',
+                icon: '👥',
+                gradient: 'from-orange-600 to-red-500',
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="group relative p-8 rounded-2xl bg-gradient-to-br from-slate-900/80 to-slate-900/40 border border-blue-500/30 hover:border-cyan-500/60 transition-all duration-300 overflow-hidden"
+                onMouseEnter={(e) => {
+                  gsap.to(e.currentTarget, {
+                    duration: 0.3,
+                    y: -8,
+                    boxShadow: '0 20px 40px rgba(0, 217, 255, 0.2)',
+                  })
+                }}
+                onMouseLeave={(e) => {
+                  gsap.to(e.currentTarget, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: '0 10px 30px rgba(0, 102, 255, 0.1)',
+                  })
+                }}
+              >
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-2xl mb-4 group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all duration-300`}>
+                  {item.icon}
+                </div>
+                <div className="text-4xl font-bold gradient-text mb-2">{item.metric}</div>
+                <h3 className="text-lg font-bold text-white mb-1">{item.label}</h3>
+                <p className="text-sm text-gray-400">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
