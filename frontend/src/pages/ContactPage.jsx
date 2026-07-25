@@ -1,158 +1,122 @@
-import { useRef, useEffect } from 'react'
-import gsap from 'gsap'
+import { useState } from 'react'
+import PageHeader from '../components/PageHeader'
+
+const channels = [
+  { label: 'Email', value: 'contact@ecell.iitbhilai.ac.in', href: 'mailto:contact@ecell.iitbhilai.ac.in' },
+  { label: 'Campus', value: 'IIT Bhilai, Kutelabhata, Durg', href: '#' },
+  { label: 'Social', value: '@ecell_iitbhilai', href: '#' },
+]
 
 export default function ContactPage() {
-  const formRef = useRef()
+  const [status, setStatus] = useState('idle')
 
-  useEffect(() => {
-    gsap.fromTo(
-      formRef.current?.children,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
-    )
-  }, [])
-
-  const handleSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    gsap.to(formRef.current, {
-      duration: 0.5,
-      scale: 0.98,
-      ease: 'back.out',
-    })
-    gsap.to(formRef.current, {
-      duration: 0.5,
-      scale: 1,
-      delay: 0.3,
-    })
-    alert('Message sent! We will get back to you soon.')
+    const form = new FormData(e.currentTarget)
+    setStatus('sending')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.get('name'),
+          email: form.get('email'),
+          message: form.get('message'),
+        }),
+      })
+      setStatus(res.ok ? 'sent' : 'error')
+      if (res.ok) e.target.reset()
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
-    <div className="pt-20">
-      {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-dark to-slate-900/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-6xl font-bold mb-6 gradient-text">Get In Touch</h1>
-          <p className="text-2xl text-gray-300">
-            Have questions? We'd love to hear from you. Send us a message!
-          </p>
-        </div>
-      </section>
+    <div className="bg-paper">
+      <PageHeader
+        eyebrow="Contact"
+        title="Say hello"
+        lead="Questions about joining, sponsoring an event, or speaking on campus? Write to us — we read everything."
+      />
 
-      {/* Contact Section */}
-      <section className="py-20 bg-dark">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            {[
-              {
-                icon: '📧',
-                title: 'Email',
-                info: 'contact@ecell.iitbhilai.ac.in',
-                link: 'mailto:contact@ecell.iitbhilai.ac.in'
-              },
-              {
-                icon: '📍',
-                title: 'Location',
-                info: 'IIT Bhilai, Raipur',
-                link: '#'
-              },
-              {
-                icon: '💬',
-                title: 'Follow Us',
-                info: '@ECell_IITBhilai',
-                link: '#'
-              },
-            ].map((contact, idx) => (
-              <a
-                key={idx}
-                href={contact.link}
-                className="p-8 rounded-2xl bg-gradient-to-br from-blue-600/10 to-cyan-500/10 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 group text-center"
-              >
-                <div className="text-4xl mb-4">{contact.icon}</div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">
-                  {contact.title}
-                </h3>
-                <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
-                  {contact.info}
-                </p>
-              </a>
-            ))}
+      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          {/* Channels */}
+          <div className="lg:col-span-4">
+            <p className="eyebrow mb-10">Reach us</p>
+            <ul>
+              {channels.map((c) => (
+                <li key={c.label} className="border-t border-stone py-7">
+                  <div className="text-xs uppercase tracking-[0.2em] text-ink-40">{c.label}</div>
+                  <a
+                    href={c.href}
+                    className="mt-2 block text-lg font-medium transition-colors hover:text-ink-70"
+                  >
+                    {c.value}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto">
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="space-y-6 p-10 rounded-2xl bg-gradient-to-br from-blue-600/10 to-cyan-500/10 border border-blue-500/20"
-            >
-              <div>
-                <label className="block text-sm font-semibold mb-3">Name</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-6 py-3 rounded-lg bg-slate-900/50 border border-blue-500/20 focus:border-blue-500/50 text-white placeholder-gray-500 outline-none transition-colors duration-300"
-                  placeholder="Your name"
-                />
+          {/* Form */}
+          <div className="lg:col-span-8">
+            <form onSubmit={onSubmit} className="rounded-4xl bg-bone p-8 sm:p-12">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <label className="block">
+                  <span className="eyebrow">Name</span>
+                  <input
+                    name="name"
+                    required
+                    placeholder="Your name"
+                    className="mt-3 w-full border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                  />
+                </label>
+                <label className="block">
+                  <span className="eyebrow">Email</span>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    className="mt-3 w-full border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                  />
+                </label>
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-3">Email</label>
-                <input
-                  type="email"
-                  required
-                  className="w-full px-6 py-3 rounded-lg bg-slate-900/50 border border-blue-500/20 focus:border-blue-500/50 text-white placeholder-gray-500 outline-none transition-colors duration-300"
-                  placeholder="Your email"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-3">Subject</label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-6 py-3 rounded-lg bg-slate-900/50 border border-blue-500/20 focus:border-blue-500/50 text-white placeholder-gray-500 outline-none transition-colors duration-300"
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-3">Message</label>
+              <label className="mt-10 block">
+                <span className="eyebrow">Message</span>
                 <textarea
+                  name="message"
                   required
-                  rows={6}
-                  className="w-full px-6 py-3 rounded-lg bg-slate-900/50 border border-blue-500/20 focus:border-blue-500/50 text-white placeholder-gray-500 outline-none transition-colors duration-300 resize-none"
-                  placeholder="Your message"
-                ></textarea>
+                  rows={5}
+                  placeholder="Tell us what you're thinking about…"
+                  className="mt-3 w-full resize-none border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                />
+              </label>
+
+              <div className="mt-12 flex flex-wrap items-center gap-6">
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="rounded-full bg-ink px-9 py-4 font-semibold text-white transition-colors hover:bg-accent hover:text-ink disabled:opacity-50"
+                >
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
+
+                {status === 'sent' && (
+                  <p className="text-sm font-medium text-ink">
+                    Thanks — we'll get back to you shortly.
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="text-sm font-medium text-ink-70">
+                    Something went wrong. Try emailing us directly.
+                  </p>
+                )}
               </div>
-
-              <button type="submit" className="btn-primary w-full">
-                Send Message
-              </button>
             </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Social Links */}
-      <section className="py-20 bg-gradient-to-b from-slate-900/50 to-dark">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-12">Connect With Us</h2>
-          <div className="flex gap-6 justify-center flex-wrap">
-            {[
-              { name: 'Twitter', icon: '𝕏', color: 'from-blue-600 to-blue-700' },
-              { name: 'LinkedIn', icon: 'in', color: 'from-blue-700 to-blue-800' },
-              { name: 'Instagram', icon: '📷', color: 'from-pink-600 to-rose-600' },
-              { name: 'GitHub', icon: '⚙️', color: 'from-gray-600 to-gray-700' },
-            ].map((social, idx) => (
-              <a
-                key={idx}
-                href="#"
-                className={`w-16 h-16 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center text-2xl hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-110`}
-              >
-                {social.icon}
-              </a>
-            ))}
           </div>
         </div>
       </section>

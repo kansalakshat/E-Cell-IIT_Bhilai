@@ -1,70 +1,117 @@
 import { Link } from 'react-router-dom'
 
+const columns = [
+  {
+    heading: 'Navigate',
+    links: [
+      { label: 'Home', to: '/' },
+      { label: 'About', to: '/about' },
+      { label: 'Events', to: '/events' },
+      { label: 'Contact', to: '/contact' },
+    ],
+  },
+  {
+    heading: 'Programmes',
+    links: [
+      { label: 'Speaker Sessions', to: '/events' },
+      { label: 'E-Conclave', to: '/events' },
+      { label: 'Hackathons', to: '/events' },
+      { label: 'Mentorship', to: '/about' },
+    ],
+  },
+]
+
+const socials = ['Instagram', 'LinkedIn', 'X', 'GitHub']
+
 export default function Footer() {
   return (
-    <footer className="bg-dark border-t border-blue-500/10 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+    <footer className="border-t border-stone bg-paper">
+      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
           {/* Brand */}
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center font-bold text-lg">
+          <div className="lg:col-span-5">
+            <Link to="/" className="inline-flex items-center gap-2">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-ink text-sm font-black text-white">
                 E
-              </div>
-              <span className="font-bold text-xl gradient-text">E-Cell</span>
-            </div>
-            <p className="text-gray-400 text-sm">
-              Fostering entrepreneurship and innovation at IIT Bhilai
+              </span>
+              <span className="display text-xl">
+                e<span className="text-ink-40">/</span>cell
+              </span>
+            </Link>
+            <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-ink-70">
+              The Entrepreneurship Cell of IIT Bhilai. We build the room where ideas meet
+              the people who can fund, challenge and ship them.
             </p>
+            <a
+              href="mailto:contact@ecell.iitbhilai.ac.in"
+              className="mt-8 inline-block border-b border-ink pb-1 text-sm font-semibold transition-colors hover:border-ink-40 hover:text-ink-70"
+            >
+              contact@ecell.iitbhilai.ac.in
+            </a>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link to="/" className="hover:text-blue-400 transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-blue-400 transition-colors">About</Link></li>
-              <li><Link to="/events" className="hover:text-blue-400 transition-colors">Events</Link></li>
-              <li><Link to="/contact" className="hover:text-blue-400 transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Initiatives */}
-          <div>
-            <h4 className="font-bold mb-4">Initiatives</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Speaker Sessions</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Competitions</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Hackathons</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Mentorship</a></li>
-            </ul>
-          </div>
+          {/* Link columns */}
+          {columns.map((col) => (
+            <div key={col.heading} className="lg:col-span-2">
+              <h4 className="eyebrow mb-6">{col.heading}</h4>
+              <ul className="space-y-3">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <Link
+                      to={l.to}
+                      className="text-[15px] text-ink-70 transition-colors hover:text-ink"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           {/* Social */}
-          <div>
-            <h4 className="font-bold mb-4">Connect</h4>
-            <div className="flex gap-4">
-              {['twitter', 'linkedin', 'instagram', 'github'].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 hover:bg-blue-600/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30"
-                >
-                  <span className="text-xs font-bold">{social[0].toUpperCase()}</span>
-                </a>
+          <div className="lg:col-span-3">
+            <h4 className="eyebrow mb-6">Follow</h4>
+            <ul className="space-y-3">
+              {socials.map((s) => (
+                <li key={s}>
+                  <a
+                    href="#"
+                    className="group inline-flex items-center gap-2 text-[15px] text-ink-70 transition-colors hover:text-ink"
+                  >
+                    {s}
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
+                    </svg>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-blue-500/10 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>&copy; 2024 E-Cell IIT Bhilai. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Terms & Conditions</a>
-            </div>
+        {/* Oversized wordmark */}
+        <div className="mt-20 overflow-hidden border-t border-stone pt-10">
+          <div className="display select-none text-[clamp(3rem,15vw,12rem)] leading-none text-stone">
+            E-CELL
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-3 text-xs text-ink-40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} E-Cell, IIT Bhilai. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="transition-colors hover:text-ink">
+              Privacy
+            </a>
+            <a href="#" className="transition-colors hover:text-ink">
+              Terms
+            </a>
           </div>
         </div>
       </div>

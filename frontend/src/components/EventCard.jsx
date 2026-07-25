@@ -1,72 +1,64 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
+import { useInView } from '../hooks/useInView'
 
-export default function EventCard({ event }) {
-  const cardRef = useRef()
+const fmt = (d) =>
+  new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
+
+export default function EventCard({ event, index = 0 }) {
+  const ref = useRef()
+  const inView = useInView(ref, { threshold: 0.15 })
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!cardRef.current) return
+    if (!inView) return
+    gsap.to(ref.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.85,
+      delay: (index % 3) * 0.07,
+      ease: 'power3.out',
+    })
+  }, [inView, index])
 
-      const rect = cardRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-
-      gsap.to(cardRef.current, {
-        duration: 0.3,
-        '--mouse-x': `${x}px`,
-        '--mouse-y': `${y}px`,
-        ease: 'power2.out',
-      })
-    }
-
-    cardRef.current?.addEventListener('mousemove', handleMouseMove)
-    return () => cardRef.current?.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  const label = (event.type || event.category || 'event').replace(/_/g, ' ')
 
   return (
-    <div
-      ref={cardRef}
-      className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+    <article
+      ref={ref}
+      className="group flex translate-y-8 flex-col justify-between rounded-4xl border border-stone bg-paper p-8 opacity-0 transition-colors duration-500 ease-smooth hover:border-ink hover:bg-ink"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-slate-900/30 to-slate-900/50 group-hover:from-blue-600/20 group-hover:to-cyan-500/20 transition-all duration-500"></div>
-
-      {/* Border */}
-      <div className="absolute inset-0 border border-blue-500/20 group-hover:border-blue-500/50 rounded-2xl transition-all duration-300"></div>
-
-      {/* Content */}
-      <div className="relative h-full p-8 flex flex-col justify-between z-10">
-        <div>
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-600/20 text-blue-300 mb-4 group-hover:bg-blue-600/30 transition-colors">
-            {event.type}
+      <div>
+        <div className="flex items-start justify-between gap-4">
+          <span className="rounded-full bg-bone px-3 py-1 text-xs font-semibold capitalize text-ink transition-colors duration-500 group-hover:bg-accent">
+            {label}
           </span>
-          <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors duration-300">
-            {event.title}
-          </h3>
-          <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-            {event.description}
-          </p>
+          <time className="text-xs text-ink-40 transition-colors duration-500 group-hover:text-white/40">
+            {fmt(event.date)}
+          </time>
         </div>
 
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">
-            {new Date(event.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </span>
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all duration-300">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </div>
-        </div>
+        <h3 className="display mt-7 text-3xl transition-colors duration-500 group-hover:text-white">
+          {event.title}
+        </h3>
+        <p className="mt-4 text-[15px] leading-relaxed text-ink-70 transition-colors duration-500 group-hover:text-white/60">
+          {event.description}
+        </p>
       </div>
 
-      {/* Hover effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-cyan-500/0 to-blue-600/0 group-hover:from-blue-600/10 group-hover:via-cyan-500/10 group-hover:to-blue-600/10 transition-all duration-300"></div>
-    </div>
+      <div className="mt-10 flex items-center gap-3 text-sm font-semibold transition-colors duration-500 group-hover:text-white">
+        <span className="grid h-9 w-9 place-items-center rounded-full border border-ink transition-all duration-500 ease-smooth group-hover:border-accent group-hover:bg-accent">
+          <svg
+            className="h-3.5 w-3.5 transition-transform duration-500 ease-smooth group-hover:rotate-45"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </span>
+        Details
+      </div>
+    </article>
   )
 }

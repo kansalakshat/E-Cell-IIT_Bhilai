@@ -1,28 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: '#ff6b35',      // Premium Orange
-        secondary: '#f7931e',     // Gold Orange
-        accent: '#00d9ff',        // Cyan for highlights
-        dark: '#0f0f0f',          // Pure black background
-        'dark-secondary': '#1a1a1a',  // Subtle dark
-        'text-muted': '#808080',      // Muted text
+        paper: '#ffffff',
+        bone: '#f2f2ef',
+        stone: '#e6e6e1',
+        ink: '#0a0a0a',
+        'ink-70': '#5c5c5c',
+        'ink-40': '#9a9a9a',
+        accent: '#d8ff3e',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      fontSize: {
-        '7xl': '4.5rem',
-        '8xl': '6rem',
+      letterSpacing: {
+        tightest: '-0.045em',
       },
-      spacing: {
-        '128': '32rem',
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.75rem',
+      },
+      transitionTimingFunction: {
+        smooth: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

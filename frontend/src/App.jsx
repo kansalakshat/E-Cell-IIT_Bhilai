@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
@@ -8,35 +8,48 @@ import AboutPage from './pages/AboutPage'
 import EventsPage from './pages/EventsPage'
 import ContactPage from './pages/ContactPage'
 
-function App() {
+/* Smooth scroll, exposed so route changes can reset it */
+function SmoothScroll({ children }) {
+  const lenisRef = useRef(null)
+  const { pathname } = useLocation()
+
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.6,
     })
+    lenisRef.current = lenis
 
-    function raf(time) {
+    let rafId
+    const raf = (time) => {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      rafId = requestAnimationFrame(raf)
     }
-
-    requestAnimationFrame(raf)
+    rafId = requestAnimationFrame(raf)
 
     return () => {
+      cancelAnimationFrame(rafId)
       lenis.destroy()
+      lenisRef.current = null
     }
   }, [])
 
+  /* Jump to top on navigation */
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true })
+  }, [pathname])
+
+  return children
+}
+
+function Shell() {
   return (
-    <Router>
-      <div className="bg-dark text-white">
+    <SmoothScroll>
+      <div className="min-h-screen bg-paper text-ink">
         <Navigation />
         <main>
           <Routes>
@@ -48,8 +61,14 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </SmoothScroll>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <Router>
+      <Shell />
+    </Router>
+  )
+}
