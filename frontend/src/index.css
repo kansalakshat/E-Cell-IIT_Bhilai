@@ -14,9 +14,10 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #0a0a0a;
+  background: #0f0f0f;
   color: #ffffff;
   overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
 /* Custom scrollbar */
@@ -29,12 +30,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0066ff;
+  background: #ff6b35;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0052cc;
+  background: #f7931e;
 }
 
 /* Global animations */
@@ -86,13 +87,13 @@ body {
   color: white;
 }
 
-/* Custom button styles */
+/* Custom button styles - Premium Orange */
 .btn-primary {
-  @apply px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer;
+  @apply px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/50 cursor-pointer;
 }
 
 .btn-secondary {
-  @apply px-8 py-3 border-2 border-blue-600 text-blue-400 rounded-lg font-semibold transition-all duration-300 hover:bg-blue-600/10 cursor-pointer;
+  @apply px-8 py-3 border-2 border-orange-600 text-orange-400 rounded-lg font-semibold transition-all duration-300 hover:bg-orange-600/10 cursor-pointer;
 }
 
 /* Card hover effect */
@@ -100,13 +101,14 @@ body {
   @apply transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20;
 }
 
-/* Gradient text */
+/* Gradient text - Premium Orange to Gold */
 .gradient-text {
-  background: linear-gradient(135deg, #0066ff, #00d9ff);
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientShift 3s ease infinite;
+  font-weight: 700;
 }
 
 @keyframes gradientShift {

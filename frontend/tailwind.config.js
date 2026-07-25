@@ -7,12 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0066ff',
-        dark: '#0a0a0a',
-        accent: '#00d9ff',
+        primary: '#ff6b35',      // Premium Orange
+        secondary: '#f7931e',     // Gold Orange
+        accent: '#00d9ff',        // Cyan for highlights
+        dark: '#0f0f0f',          // Pure black background
+        'dark-secondary': '#1a1a1a',  // Subtle dark
+        'text-muted': '#808080',      // Muted text
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        '7xl': '4.5rem',
+        '8xl': '6rem',
+      },
+      spacing: {
+        '128': '32rem',
       },
     },
   },
