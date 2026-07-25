@@ -7,6 +7,7 @@ import EventCard from '../components/EventCard'
 import EntrepreneurshipCard from '../components/EntrepreneurshipCard'
 import GuideCard from '../components/GuideCard'
 import Stats3D from '../components/Stats3D'
+import EventGallery from '../components/EventGallery'
 import { useInView } from '../hooks/useInView'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -200,6 +201,76 @@ const events = [
     date: "2024-09-15",
     description: "Solve real-world industry challenges",
     type: "challenge"
+  },
+]
+
+// Real E-Cell Events Gallery
+const eventGallery = [
+  {
+    title: 'Expert Speaker Sessions',
+    description: 'Industry leaders and successful founders sharing their entrepreneurial journey and insights',
+    category: 'Speaker Session',
+    gradient: 'from-blue-600 to-cyan-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '50+', label: 'Speakers' },
+      { value: '1000+', label: 'Attendees' },
+    ],
+  },
+  {
+    title: 'E-Conclave Events',
+    description: 'Major flagship events featuring startup showcases, pitch competitions, and networking',
+    category: 'E-Conclave',
+    gradient: 'from-purple-600 to-pink-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '20+', label: 'Startups' },
+      { value: '500+', label: 'Participants' },
+    ],
+  },
+  {
+    title: 'Workshops & Training',
+    description: 'Hands-on learning sessions on pitching, product design, fundraising, and growth strategies',
+    category: 'Workshop',
+    gradient: 'from-green-600 to-emerald-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '30+', label: 'Workshops' },
+      { value: '800+', label: 'Trained' },
+    ],
+  },
+  {
+    title: 'Hackathons & Competitions',
+    description: '24-48 hour intense coding marathons and innovation challenges with real mentorship',
+    category: 'Hackathon',
+    gradient: 'from-orange-600 to-red-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '5+', label: 'Annual' },
+      { value: '200+', label: 'Hackers' },
+    ],
+  },
+  {
+    title: 'Mentorship & Networking',
+    description: 'One-on-one sessions with experienced entrepreneurs and investor meet-and-greets',
+    category: 'Mentorship',
+    gradient: 'from-cyan-600 to-blue-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '100+', label: 'Mentors' },
+      { value: '500+', label: 'Members' },
+    ],
+  },
+  {
+    title: 'Case Study Competitions',
+    description: 'Solve real-world business problems and present your solutions to expert judges',
+    category: 'Competition',
+    gradient: 'from-pink-600 to-rose-500',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+    stats: [
+      { value: '100+', label: 'Participants' },
+      { value: '$50K+', label: 'Prize Pool' },
+    ],
   },
 ]
 
@@ -462,6 +533,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Event Gallery Section */}
+      <EventGallery
+        title="Our Events In Action"
+        description="Experience the vibrant E-Cell community through our diverse events and initiatives"
+        events={eventGallery}
+      />
 
       {/* Testimonials Section */}
       <section className="py-20 bg-gradient-to-b from-dark to-slate-900/50">
