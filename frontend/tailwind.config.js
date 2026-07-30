@@ -10,7 +10,16 @@ export default {
         ink: '#0a0a0a',
         'ink-70': '#5c5c5c',
         'ink-40': '#9a9a9a',
-        accent: '#d8ff3e',
+
+        /* Card tones — vivid blocks on a white page */
+        lime: '#d4ff3f',
+        grass: '#0f5132',
+        blush: '#ff9db0',
+        butter: '#ffe066',
+        violet: '#c4b5ff',
+        sky: '#9ad7f5',
+
+        accent: '#d4ff3f',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
