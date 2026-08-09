@@ -1,4 +1,4 @@
-import { useRef, useMemo, useEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -12,28 +12,10 @@ const SPIN = 0.12
 
 export default function RobotFace() {
   const ref = useRef()
+  /* Materials untouched — original colours, original gloss. The only
+     correction is on the Canvas: `flat` disables ACES tone mapping, which
+     is what was tinting the whites cream. */
   const { scene } = useGLTF(MODEL_URL)
-
-  /* Strip every reflective property. Sketchfab renders against an
-     environment map that makes gloss read as depth; with only direct lights
-     here the same materials just produce hotspots. Fully rough and
-     non-metallic leaves pure diffuse shading — the form, no shine. */
-  useEffect(() => {
-    scene.traverse((o) => {
-      if (!o.isMesh || !o.material) return
-      const materials = Array.isArray(o.material) ? o.material : [o.material]
-      materials.forEach((m) => {
-        if ('roughness' in m) m.roughness = 1
-        if ('metalness' in m) m.metalness = 0
-        if ('envMapIntensity' in m) m.envMapIntensity = 0
-        if ('clearcoat' in m) m.clearcoat = 0
-        if ('sheen' in m) m.sheen = 0
-        if ('specularIntensity' in m) m.specularIntensity = 0
-        if ('reflectivity' in m) m.reflectivity = 0
-        m.needsUpdate = true
-      })
-    })
-  }, [scene])
 
   /* Measured rather than guessed: the export's scale and pivot are the
      artist's, so read the bounding box and derive both from it. */
