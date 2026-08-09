@@ -46,7 +46,7 @@ export default function Navigation() {
             className="h-8 w-8 object-contain"
           />
           <span className="display hidden text-lg leading-none text-ink sm:inline">
-            E<span className="text-ink-40">/</span>CELL
+            E<span className="text-ink-40">-</span>CELL
           </span>
         </Link>
 

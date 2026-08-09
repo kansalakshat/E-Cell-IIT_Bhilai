@@ -39,7 +39,7 @@ export default function Footer() {
                 className="h-9 w-9 object-contain"
               />
               <span className="display text-2xl">
-                E<span className="text-ink-40">/</span>CELL
+                E<span className="text-ink-40">-</span>CELL
               </span>
             </Link>
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-ink-70">
