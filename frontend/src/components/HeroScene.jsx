@@ -1,6 +1,7 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useRef, useMemo, lazy, Suspense } from 'react'
+import { useRef, useMemo, useEffect, lazy, Suspense } from 'react'
 import * as THREE from 'three'
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { useSceneColors } from '../theme'
 import ModelBoundary from './ModelBoundary'
 
@@ -104,6 +105,29 @@ function Rings() {
   )
 }
 
+/* Glossy PBR materials shade from what they can reflect. Sketchfab renders
+   against an HDR environment, which is where the model's highlights and
+   mirror-black neck come from — with only direct lights it reads flat and
+   grey. RoomEnvironment ships inside three, so this costs no network
+   request and no asset. */
+function StudioEnvironment() {
+  const gl = useThree((s) => s.gl)
+  const scene = useThree((s) => s.scene)
+
+  useEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl)
+    const envMap = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+    scene.environment = envMap
+    return () => {
+      scene.environment = null
+      envMap.dispose()
+      pmrem.dispose()
+    }
+  }, [gl, scene])
+
+  return null
+}
+
 /* Leans toward the cursor, drifts with scroll */
 function Rig({ children }) {
   const group = useRef()
@@ -129,11 +153,12 @@ export default function HeroScene() {
       camera={{ position: [0, 0.5, 10], fov: 50 }}
       gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
     >
-      {/* Trimmed from 1.6/2.2/0.7: that summed well past 1 and, without tone
-          mapping to roll it off, blew the highlights out to flat white. */}
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[5, 8, 6]} intensity={1.4} />
-      <directionalLight position={[-6, -3, 2]} intensity={0.5} />
+      <StudioEnvironment />
+      {/* Low, now that the environment does most of the lighting — ambient
+          flattens PBR and was greying out the model's blacks. */}
+      <ambientLight intensity={0.25} />
+      <directionalLight position={[5, 8, 6]} intensity={1.1} />
+      <directionalLight position={[-6, -3, 2]} intensity={0.35} />
       <Rig>
         {/* Robot face replaces the knot + core. Both fall back together:
             the core was framed to sit inside the knot, so showing it around
