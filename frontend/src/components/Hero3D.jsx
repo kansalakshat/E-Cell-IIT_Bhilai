@@ -36,13 +36,14 @@ export default function Hero3D() {
         )}
       </div>
 
-      {/* Wash so type stays legible over the geometry */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent" />
+      {/* Wash so type stays legible over the geometry. Vertical on phones,
+          where the copy spans the full width, horizontal from sm up. */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-paper via-paper/85 to-paper/40 sm:bg-gradient-to-r sm:via-paper/70 sm:to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pt-32 pb-24 sm:px-10">
         <p className="hero-fade eyebrow mb-8">Entrepreneurship Cell — IIT Bhilai</p>
 
-        <h1 className="display text-[clamp(3.2rem,10.5vw,10rem)] uppercase">
+        <h1 className="display text-[clamp(2.4rem,10.5vw,10rem)] uppercase">
           <span className="hero-line line-mask">
             <span className="block">Build.</span>
           </span>

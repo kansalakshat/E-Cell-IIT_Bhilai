@@ -247,7 +247,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
         <Reveal>
           <p className="eyebrow mb-10">Who we are</p>
-          <h2 className="display max-w-4xl text-[clamp(2rem,5.2vw,4.2rem)] uppercase">
+          <h2 className="display max-w-4xl text-[clamp(1.6rem,5.2vw,4.2rem)] uppercase">
             Entrepreneurship is not about starting companies. It is about noticing a{' '}
             <span className="bg-lime px-2">problem worth solving</span> — and refusing to
             leave it alone.
@@ -265,7 +265,7 @@ export default function HomePage() {
         <Reveal className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-5">What we do</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">Six ways in.</h2>
+            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">Six ways in.</h2>
           </div>
           <p className="max-w-sm text-ink-70">
             No startup idea required. No business background required. Curiosity and
@@ -285,7 +285,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:py-32">
           <Reveal>
             <p className="eyebrow mb-5">By the numbers</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
+            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
               Small cell.
               <br />
               Loud output.
@@ -321,7 +321,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
         <Reveal className="mb-14">
           <p className="eyebrow mb-5">What runs through the year</p>
-          <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
+          <h2 className="display max-w-3xl text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
             Things we actually run.
           </h2>
         </Reveal>
@@ -338,7 +338,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 pb-28 sm:px-10 sm:pb-36">
           <Reveal className="mb-6">
             <p className="eyebrow mb-5">The path</p>
-            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
+            <h2 className="display max-w-3xl text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
               Idea to company, in four moves.
             </h2>
           </Reveal>
@@ -356,7 +356,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
             <p className="eyebrow mb-5 text-paper/70">From the room</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
+            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
               People who went through it.
             </h2>
           </Reveal>
@@ -384,7 +384,7 @@ export default function HomePage() {
       {/* Closing CTA */}
       <section className="mx-auto max-w-7xl px-6 py-32 sm:px-10 sm:py-44">
         <Reveal className="text-center">
-          <h2 className="display mx-auto max-w-4xl text-[clamp(2.6rem,8vw,7rem)] uppercase">
+          <h2 className="display mx-auto max-w-4xl text-[clamp(2rem,8vw,7rem)] uppercase">
             Bring the curiosity. <span className="bg-accent px-3 text-ink">We handle the rest.</span>
           </h2>
           <p className="mx-auto mt-10 max-w-xl text-lg text-ink-70">

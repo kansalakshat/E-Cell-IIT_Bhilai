@@ -112,7 +112,7 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
             <p className="eyebrow mb-5">What we hold to</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">Core values.</h2>
+            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">Core values.</h2>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
@@ -137,7 +137,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
         <Reveal className="mb-14">
           <p className="eyebrow mb-5">Programmes</p>
-          <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
+          <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -164,7 +164,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
             <p className="eyebrow mb-5 text-paper/70">Membership</p>
-            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
+            <h2 className="display max-w-3xl text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
               Who can join? Everyone.
             </h2>
           </Reveal>

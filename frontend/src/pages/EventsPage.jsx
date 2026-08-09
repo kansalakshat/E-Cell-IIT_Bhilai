@@ -129,7 +129,7 @@ export default function EventsPage() {
       <section className="relative overflow-hidden border-t border-stone bg-bone py-24 sm:py-32">
         <LazyScene scene={Burst} className="scene-bg pointer-events-none absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center sm:px-10">
-          <h2 className="display text-[clamp(2rem,5vw,3.5rem)] uppercase">Never miss one.</h2>
+          <h2 className="display text-[clamp(1.6rem,5vw,3.5rem)] uppercase">Never miss one.</h2>
           <p className="mx-auto mt-6 max-w-md text-ink-70">
             Event announcements, problem statements and opportunities — straight to your inbox.
           </p>

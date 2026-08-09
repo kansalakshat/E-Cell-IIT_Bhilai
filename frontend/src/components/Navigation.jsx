@@ -104,7 +104,7 @@ export default function Navigation() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
             aria-expanded={open}
-            className="ml-auto sm:ml-1 md:hidden grid h-10 w-10 place-items-center border border-stone bg-lime text-ink"
+            className="sm:ml-1 md:hidden grid h-10 w-10 place-items-center border border-stone bg-lime text-ink"
           >
             <span className="relative block h-3 w-4">
               <span

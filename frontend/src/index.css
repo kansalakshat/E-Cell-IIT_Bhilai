@@ -210,17 +210,21 @@ body {
       box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
       border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .brutal:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--sh-lift);
-  }
   :root[data-theme='light'] .brutal {
     border-width: 2px;
     box-shadow: var(--sh-lift);
   }
-  :root[data-theme='light'] .brutal:hover {
-    transform: translate(4px, 4px);
-    box-shadow: var(--sh-soft);
+  /* Hover effects only where a real pointer exists — on touch these latch
+     on tap and stay stuck until you tap something else. */
+  @media (hover: hover) and (pointer: fine) {
+    .brutal:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sh-lift);
+    }
+    :root[data-theme='light'] .brutal:hover {
+      transform: translate(4px, 4px);
+      box-shadow: var(--sh-soft);
+    }
   }
 
   /* Panel sitting on an inverted block */
@@ -231,16 +235,18 @@ body {
     transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .brutal-light:hover {
-    transform: translateY(-3px);
-  }
   :root[data-theme='light'] .brutal-light {
     border: 2px solid rgb(var(--c-paper));
     box-shadow: 8px 8px 0 0 rgb(var(--c-accent));
   }
-  :root[data-theme='light'] .brutal-light:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 2px 2px 0 0 rgb(var(--c-accent));
+  @media (hover: hover) and (pointer: fine) {
+    .brutal-light:hover {
+      transform: translateY(-3px);
+    }
+    :root[data-theme='light'] .brutal-light:hover {
+      transform: translate(4px, 4px);
+      box-shadow: 2px 2px 0 0 rgb(var(--c-accent));
+    }
   }
 
   .scene-bg {
@@ -282,10 +288,12 @@ h2,
 h3 {
   transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-h1:hover,
-h2:hover,
-h3:hover {
-  transform: scale(1.02);
+@media (hover: hover) and (pointer: fine) {
+  h1:hover,
+  h2:hover,
+  h3:hover {
+    transform: scale(1.02);
+  }
 }
 
 .line-mask {

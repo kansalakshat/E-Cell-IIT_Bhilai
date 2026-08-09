@@ -6,6 +6,11 @@ const c = (name) => `rgb(var(${name}) / <alpha-value>)`
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  /* Compiles every `hover:` utility behind @media (hover: hover), so taps on
+     touch devices no longer latch the hover state until you tap elsewhere. */
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       colors: {
