@@ -255,7 +255,14 @@ body {
   .rail {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    /* `proximity`, not `mandatory`: mandatory forces every swipe to land
+       exactly on a card, so the row jumps card-to-card instead of gliding.
+       Proximity lets the flick carry with momentum and only tidies up when
+       it stops near an edge. */
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+    /* Keeps a horizontal flick from triggering the browser's back gesture */
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     /* Bleed to the screen edge so the last card isn't visually trapped */
@@ -305,6 +312,9 @@ body {
       /* Snap points fight programmatic scrollLeft — the browser keeps
          re-snapping against useScrollRail. Touch keeps its snap below md. */
       scroll-snap-type: none;
+      /* useScrollRail writes scrollLeft every frame; smooth would ease each
+         write and leave the rail lagging behind the page. */
+      scroll-behavior: auto;
     }
     .rail-lock > * {
       flex: 0 0 46%;
