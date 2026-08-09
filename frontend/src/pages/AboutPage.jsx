@@ -81,8 +81,8 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal>
-            <div className="brutal h-full bg-ink p-10 text-white sm:p-12">
-              <p className="eyebrow mb-8 text-white/70">Mission</p>
+            <div className="brutal h-full bg-ink p-10 text-paper sm:p-12">
+              <p className="eyebrow mb-8 text-paper/70">Mission</p>
               <ul className="space-y-5">
                 {[
                   'Promote entrepreneurial thinking across every discipline.',
@@ -92,7 +92,7 @@ export default function AboutPage() {
                   'Create room for networking, mentorship and collaboration.',
                   'Help students turn ideas into things that exist.',
                 ].map((m) => (
-                  <li key={m} className="flex gap-4 text-white/75">
+                  <li key={m} className="flex gap-4 text-paper/75">
                     <span className="mt-2 h-2 w-2 shrink-0 bg-accent" />
                     <span>{m}</span>
                   </li>
@@ -104,7 +104,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values — helix drifts behind the list */}
-      <section className="relative overflow-hidden border-y-2 border-ink bg-bone py-24 sm:py-32">
+      <section className="relative overflow-hidden border-y border-stone bg-bone py-24 sm:py-32">
         <LazyScene
           scene={Helix}
           className="scene-bg pointer-events-none absolute inset-0"
@@ -118,7 +118,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
             {values.map(([title, body], i) => (
               <Reveal key={title}>
-                <div className="flex gap-6 border-t-2 border-ink py-8">
+                <div className="flex gap-6 border-t border-stone py-8">
                   <span className="pt-1 text-sm tabular-nums text-ink-40">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -160,10 +160,10 @@ export default function AboutPage() {
       </section>
 
       {/* Who can join */}
-      <section className="bg-ink py-24 text-white sm:py-32">
+      <section className="bg-ink py-24 text-paper sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
-            <p className="eyebrow mb-5 text-white/70">Membership</p>
+            <p className="eyebrow mb-5 text-paper/70">Membership</p>
             <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               Who can join? Everyone.
             </h2>
@@ -171,8 +171,8 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Reveal>
-              <div className="brutal-light bg-ink p-10">
-                <p className="eyebrow mb-8 text-white/70">You do not need</p>
+              <div className="brutal bg-paper p-10 text-ink">
+                <p className="eyebrow mb-8">You do not need</p>
                 <ul className="space-y-4">
                   {[
                     'A startup idea',
@@ -181,8 +181,8 @@ export default function AboutPage() {
                     'Marketing experience',
                     'Any prior entrepreneurial experience',
                   ].map((x) => (
-                    <li key={x} className="flex items-center gap-4 text-white/50 line-through decoration-white/20">
-                      <span className="h-px w-5 bg-white/25" />
+                    <li key={x} className="flex items-center gap-4 text-ink/45 line-through decoration-ink/25">
+                      <span className="h-px w-5 bg-ink/30" />
                       {x}
                     </li>
                   ))}

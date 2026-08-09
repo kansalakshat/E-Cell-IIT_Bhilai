@@ -36,7 +36,7 @@ function Spokes() {
   return (
     <instancedMesh ref={mesh} args={[null, null, COUNT]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#0a0a0b" roughness={0.5} />
+      <meshStandardMaterial color="#9A9AA1" roughness={0.5} />
     </instancedMesh>
   )
 }

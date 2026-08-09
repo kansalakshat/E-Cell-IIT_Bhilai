@@ -29,7 +29,7 @@ function Piece({ geo, pos, scale, spin, solid }) {
       {solid ? (
         <meshStandardMaterial color="#e6002a" roughness={0.35} flatShading />
       ) : (
-        <meshBasicMaterial color="#0a0a0b" wireframe />
+        <meshBasicMaterial color="#E8E8ED" wireframe />
       )}
     </mesh>
   )

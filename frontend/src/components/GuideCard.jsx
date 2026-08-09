@@ -3,9 +3,9 @@ import gsap from 'gsap'
 import { useInView } from '../hooks/useInView'
 
 const TONE = {
-  Beginner: 'bg-lime text-ink border-2 border-ink',
-  Intermediate: 'bg-ink text-white border-2 border-ink',
-  Advanced: 'bg-red text-white border-2 border-ink',
+  Beginner: 'bg-lime text-ink border border-stone',
+  Intermediate: 'bg-ink text-paper border border-stone',
+  Advanced: 'bg-red text-ink border border-stone',
 }
 
 export default function GuideCard({
@@ -34,7 +34,7 @@ export default function GuideCard({
   return (
     <article
       ref={ref}
-      className="group grid translate-y-8 grid-cols-1 gap-8 border-t-2 border-ink py-12 opacity-0 md:grid-cols-12"
+      className="group grid translate-y-8 grid-cols-1 gap-8 border-t border-stone py-12 opacity-0 md:grid-cols-12"
     >
       {/* Step number */}
       <div className="md:col-span-2">

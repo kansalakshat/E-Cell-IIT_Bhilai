@@ -14,110 +14,138 @@ html {
 }
 
 body {
-  font-family: 'Poppins', system-ui, sans-serif;
-  color: #0a0a0b;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #f5f5f7;
   overflow-x: hidden;
-  /* Blueprint grid — the "visible grid" brutalism leans on */
-  background-color: #fafaf7;
-  background-image: linear-gradient(#0a0a0b0d 1px, transparent 1px),
-    linear-gradient(90deg, #0a0a0b0d 1px, transparent 1px);
-  background-size: 72px 72px;
+  letter-spacing: -0.011em;
+  background-color: #08090a;
+  /* Linear: a single soft glow anchoring the top of the page, then nothing.
+     Restraint is the point — no repeating pattern competing with content. */
+  background-image: radial-gradient(
+    58rem 40rem at 50% -14rem,
+    rgb(230 0 42 / 0.12),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #efeee7;
-  border-left: 2px solid #0a0a0b;
+  background: #08090a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0a0a0b;
-  border: 2px solid #efeee7;
+  background: #23252a;
+  border-radius: 999px;
+  border: 3px solid #08090a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #35383f;
 }
 
 ::selection {
-  background: #ec4899;
-  color: #0a0a0b;
+  background: #e6002a;
+  color: #ffffff;
 }
 
-/* Keyboard focus stays loud and square. currentColor so the ring always
-   contrasts with whatever block it lands on, light or dark. */
+/* currentColor so the ring reads on both dark ground and light blocks */
 :focus-visible {
-  outline: 3px solid currentColor;
+  outline: 2px solid currentColor;
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
-/* Component classes sit in @layer components so per-instance Tailwind
-   utilities (text-white, border-accent, …) still win over them. */
 @layer components {
-  /* Display type — Righteous, condensed and shouty */
+  /* Nike: display type is huge, uppercase and tightly tracked.
+     Space Grotesk 700 carries it without the novelty of a face like Righteous. */
   .display {
-    font-family: 'Righteous', Impact, sans-serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-family: 'Space Grotesk', Inter, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.035em;
     line-height: 0.92;
   }
 
-  /* Eyebrow label above sections */
+  /* Apple: lead paragraphs sit at weight 300 and read as calm, not loud */
+  .lead {
+    font-weight: 300;
+    letter-spacing: -0.014em;
+  }
+
   .eyebrow {
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.28em;
-    color: #0a0a0b;
+    letter-spacing: 0.22em;
+    color: #86868b;
   }
   .eyebrow::before {
     content: '';
     display: inline-block;
-    width: 1.75rem;
-    height: 3px;
+    width: 1.5rem;
+    height: 1px;
     margin-right: 0.75rem;
-    vertical-align: 0.2em;
-    background: #ec4899;
+    vertical-align: 0.3em;
+    background: #e6002a;
   }
 
-  /* Hard-edged panel: 2px rule + offset shadow, nudges into it on hover */
+  /* Stripe/Linear panel: hairline + inset highlight + deep soft shadow.
+     Lifts on hover instead of pressing into a block shadow. */
   .brutal {
-    border: 2px solid #0a0a0b;
-    box-shadow: 8px 8px 0 0 #0a0a0b;
-    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid #23252a;
+    border-radius: 14px;
+    background-clip: padding-box;
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.05) inset,
+      0 18px 50px -24px rgb(0 0 0 / 0.9);
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .brutal:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 2px 2px 0 0 #0a0a0b;
+    transform: translateY(-3px);
+    border-color: #35383f;
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.08) inset,
+      0 30px 70px -28px rgb(0 0 0 / 1);
   }
 
-  /* Same, on dark backgrounds */
+  /* Same panel sitting on an inverted (light) block */
   .brutal-light {
-    border: 2px solid #fafaf7;
-    box-shadow: 8px 8px 0 0 #ec4899;
-    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgb(8 9 10 / 0.12);
+    border-radius: 14px;
+    box-shadow: 0 18px 50px -24px rgb(0 0 0 / 0.35);
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .brutal-light:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 2px 2px 0 0 #ec4899;
+    transform: translateY(-3px);
+    box-shadow: 0 30px 70px -28px rgb(0 0 0 / 0.5);
   }
 
-  /* Background 3D layer: dissolves at the edges so the canvas has no seam
-     with the section it sits behind. */
+  /* Background 3D layer: dissolves at the edges, no seam with its section */
   .scene-bg {
-    opacity: 0.55;
+    opacity: 0.5;
     -webkit-mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
     mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
   }
 
-  /* Outlined display type — used behind big numbers */
+  /* Outlined display type for oversized numerals */
   .stroke-type {
     color: transparent;
-    -webkit-text-stroke: 2px #0a0a0b;
+    -webkit-text-stroke: 1px #3a3d44;
   }
 
   .rule {
-    height: 2px;
-    background: #0a0a0b;
+    height: 1px;
+    background: #23252a;
+  }
+
+  /* Stripe's signature: type filled with a gradient rather than a flat accent */
+  .grad-text {
+    background: linear-gradient(96deg, #ffffff 8%, #ff5470 46%, #e6002a 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
@@ -130,7 +158,7 @@ h3 {
 h1:hover,
 h2:hover,
 h3:hover {
-  transform: scale(1.035);
+  transform: scale(1.02);
 }
 
 /* Masked line reveal */
@@ -150,7 +178,7 @@ h3:hover {
 }
 
 .animate-marquee {
-  animation: marquee 28s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -159,7 +187,10 @@ h3:hover {
     transition-duration: 0.01ms !important;
   }
   .brutal:hover,
-  .brutal-light:hover {
+  .brutal-light:hover,
+  h1:hover,
+  h2:hover,
+  h3:hover {
     transform: none;
   }
 }

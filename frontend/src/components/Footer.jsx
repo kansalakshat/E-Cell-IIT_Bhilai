@@ -25,13 +25,13 @@ const socials = ['Instagram', 'LinkedIn', 'X', 'GitHub']
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-ink bg-bone">
+    <footer className="border-t border-stone bg-bone">
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
           {/* Brand */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center border-2 border-ink bg-accent text-sm font-black text-ink">
+              <span className="grid h-9 w-9 place-items-center border border-stone bg-accent text-sm font-black text-ink">
                 E
               </span>
               <span className="display text-2xl">
@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
 
         {/* Oversized wordmark */}
-        <div className="mt-20 overflow-hidden border-t-2 border-ink pt-10">
+        <div className="mt-20 overflow-hidden border-t border-stone pt-10">
           <div className="display stroke-type select-none text-[clamp(3rem,15vw,12rem)] leading-none">
             E-CELL
           </div>

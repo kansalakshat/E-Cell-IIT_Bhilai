@@ -50,11 +50,11 @@ export default function Hero3D() {
             <span className="block stroke-type">Innovate.</span>
           </span>
           <span className="hero-line line-mask">
-            <span className="inline-block bg-accent px-5 text-ink">Lead.</span>
+            <span className="grad-text block">Lead.</span>
           </span>
         </h1>
 
-        <p className="hero-fade mt-10 max-w-lg text-lg leading-relaxed text-ink-70 sm:text-xl">
+        <p className="hero-fade lead mt-10 max-w-lg text-lg leading-relaxed text-ink-70 sm:text-xl">
           We turn curiosity into companies — ideas, mentors, funding, and a room full of
           people building things that actually matter.
         </p>
@@ -89,7 +89,7 @@ export default function Hero3D() {
             ['50+', 'events a year'],
             ['20+', 'startups'],
           ].map(([v, l]) => (
-            <div key={l} className="border-2 border-ink bg-paper px-7 py-4 -ml-[2px] first:ml-0">
+            <div key={l} className="border border-stone bg-paper px-7 py-4 -ml-[2px] first:ml-0">
               <div className="display text-3xl">{v}</div>
               <div className="mt-1 text-xs font-semibold uppercase tracking-widest text-ink-40">
                 {l}

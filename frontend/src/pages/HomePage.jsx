@@ -221,23 +221,23 @@ export default function HomePage() {
       <Hero3D />
 
       {/* Marquee strip */}
-      <div className="overflow-hidden border-y-2 border-ink bg-red py-5">
+      <div className="overflow-hidden border-y border-stone bg-red py-5">
         <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
           {Array.from({ length: 4 }).map((_, i) => (
             <span
               key={i}
-              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-white"
+              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-ink"
             >
               <span>Speaker Sessions</span>
-              <span className="text-ink">/</span>
+              <span className="text-ink/40">/</span>
               <span>E-Conclave</span>
-              <span className="text-ink">/</span>
+              <span className="text-ink/40">/</span>
               <span>Hackathons</span>
-              <span className="text-ink">/</span>
+              <span className="text-ink/40">/</span>
               <span>Case Competitions</span>
-              <span className="text-ink">/</span>
+              <span className="text-ink/40">/</span>
               <span>Mentorship</span>
-              <span className="text-ink">/</span>
+              <span className="text-ink/40">/</span>
             </span>
           ))}
         </div>
@@ -300,7 +300,7 @@ export default function HomePage() {
               ].map(([v, l], i) => (
                 <div
                   key={l}
-                  className={`-ml-[2px] -mt-[2px] border-2 border-ink p-6 ${
+                  className={`-ml-[2px] -mt-[2px] border border-stone p-6 ${
                     i % 3 === 0 ? 'bg-lime' : 'bg-paper'
                   }`}
                 >
@@ -352,10 +352,10 @@ export default function HomePage() {
       </section>
 
       {/* Voices */}
-      <section className="bg-ink py-28 text-white sm:py-36">
+      <section className="bg-ink py-28 text-paper sm:py-36">
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
-            <p className="eyebrow mb-5 text-white/70">From the room</p>
+            <p className="eyebrow mb-5 text-paper/70">From the room</p>
             <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               People who went through it.
             </h2>
@@ -367,13 +367,13 @@ export default function HomePage() {
                 key={v.name}
                 className="brutal-light flex flex-col justify-between bg-ink p-9"
               >
-                <blockquote className="text-lg leading-relaxed text-white/80">
+                <blockquote className="text-lg leading-relaxed text-paper/80">
                   “{v.quote}”
                 </blockquote>
-                <figcaption className="mt-10 border-t-2 border-white/20 pt-6">
+                <figcaption className="mt-10 border-t border-paper/20 pt-6">
                   <div className="display text-xl uppercase">{v.name}</div>
                   <div className="mt-1 text-sm text-accent">{v.role}</div>
-                  <div className="mt-1 text-xs text-white/60">{v.year}</div>
+                  <div className="mt-1 text-xs text-paper/60">{v.year}</div>
                 </figcaption>
               </figure>
             ))}
@@ -396,7 +396,7 @@ export default function HomePage() {
             className="brutal group mt-12 inline-flex items-center gap-4 bg-accent px-10 py-5 text-lg font-bold uppercase tracking-wide text-ink"
           >
             Join E-Cell
-            <span className="grid h-8 w-8 place-items-center border-2 border-ink">
+            <span className="grid h-8 w-8 place-items-center border border-stone">
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
               </svg>

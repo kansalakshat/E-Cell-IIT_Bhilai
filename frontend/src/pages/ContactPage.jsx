@@ -74,7 +74,7 @@ export default function ContactPage() {
                     name="name"
                     required
                     placeholder="Your name"
-                    className="mt-3 w-full border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
+                    className="mt-3 w-full border border-stone bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                   />
                 </label>
                 <label className="block">
@@ -84,7 +84,7 @@ export default function ContactPage() {
                     type="email"
                     required
                     placeholder="you@example.com"
-                    className="mt-3 w-full border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
+                    className="mt-3 w-full border border-stone bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                   />
                 </label>
               </div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   required
                   rows={5}
                   placeholder="Tell us what you're thinking about…"
-                  className="mt-3 w-full resize-none border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
+                  className="mt-3 w-full resize-none border border-stone bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                 />
               </label>
 

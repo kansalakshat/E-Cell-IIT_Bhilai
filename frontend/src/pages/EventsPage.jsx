@@ -90,7 +90,7 @@ export default function EventsPage() {
       />
 
       {/* Filter pills */}
-      <section className="sticky top-0 z-20 border-b-2 border-ink bg-paper/90 backdrop-blur-xl">
+      <section className="sticky top-0 z-20 border-b border-stone bg-paper/90 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-6 py-5 sm:px-10">
           <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {filters.map((f) => {
@@ -100,7 +100,7 @@ export default function EventsPage() {
                   key={f.key}
                   onClick={() => setActive(f.key)}
                   aria-pressed={on}
-                  className={`shrink-0 border-2 border-ink px-5 py-2.5 text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
+                  className={`shrink-0 border border-stone px-5 py-2.5 text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
                     on ? 'bg-accent text-ink' : 'bg-paper text-ink hover:bg-lime'
                   }`}
                 >
@@ -126,7 +126,7 @@ export default function EventsPage() {
       </section>
 
       {/* Newsletter — burst pulses behind the form */}
-      <section className="relative overflow-hidden border-t-2 border-ink bg-bone py-24 sm:py-32">
+      <section className="relative overflow-hidden border-t border-stone bg-bone py-24 sm:py-32">
         <LazyScene scene={Burst} className="scene-bg pointer-events-none absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center sm:px-10">
           <h2 className="display text-[clamp(2rem,5vw,3.5rem)] uppercase">Never miss one.</h2>
@@ -141,7 +141,7 @@ export default function EventsPage() {
               type="email"
               required
               placeholder="you@iitbhilai.ac.in"
-              className="flex-1 border-2 border-ink bg-paper px-6 py-4 text-ink outline-none placeholder:text-ink-40 focus:bg-lime"
+              className="flex-1 border border-stone bg-paper px-6 py-4 text-ink outline-none placeholder:text-ink-40 focus:bg-lime"
             />
             <button
               type="submit"

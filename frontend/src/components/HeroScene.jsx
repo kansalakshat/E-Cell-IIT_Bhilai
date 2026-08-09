@@ -2,7 +2,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
 
-const INK = '#0a0a0a'
+const INK = '#E8E8ED'
 const ACCENT = '#e6002a'
 
 /* Slowly tumbling wireframe knot — the centrepiece */

@@ -3,56 +3,34 @@ import gsap from 'gsap'
 import { useInView } from '../hooks/useInView'
 import { useTilt } from '../hooks/useInteractions'
 
-/* Each tone is a full colour block — bg, text, hairline, arrow chip */
+/* Surfaces, not colour blocks. Each tone is a barely-different dark
+   plane; only the red card and the inverted card break the field. */
+const SURFACE = {
+  muted: 'text-ink-70',
+  rule: 'border-stone',
+  chip: 'bg-accent text-ink',
+  stat: 'text-ink',
+}
+
 const TONES = {
-  lime: {
-    card: 'bg-lime text-ink',
-    muted: 'text-ink/65',
-    rule: 'border-ink/15',
-    chip: 'bg-ink text-lime',
-    stat: 'text-ink',
-  },
-  grass: {
-    card: 'bg-grass text-white',
-    muted: 'text-white/70',
-    rule: 'border-white/20',
-    chip: 'bg-lime text-ink',
-    stat: 'text-lime',
-  },
-  blush: {
-    card: 'bg-blush text-ink',
-    muted: 'text-ink/65',
-    rule: 'border-ink/15',
-    chip: 'bg-ink text-blush',
-    stat: 'text-ink',
-  },
-  butter: {
-    card: 'bg-butter text-ink',
-    muted: 'text-ink/65',
-    rule: 'border-ink/15',
-    chip: 'bg-ink text-butter',
-    stat: 'text-ink',
-  },
-  violet: {
-    card: 'bg-violet text-ink',
-    muted: 'text-ink/65',
-    rule: 'border-ink/15',
-    chip: 'bg-ink text-violet',
-    stat: 'text-ink',
-  },
+  lime: { card: 'bg-lime text-ink', ...SURFACE },
+  grass: { card: 'bg-grass text-ink', ...SURFACE },
+  blush: { card: 'bg-blush text-ink', ...SURFACE },
+  butter: { card: 'bg-butter text-ink', ...SURFACE },
+  violet: { card: 'bg-violet text-ink', ...SURFACE },
   red: {
-    card: 'bg-red text-white',
-    muted: 'text-white/80',
-    rule: 'border-white/25',
-    chip: 'bg-paper text-red',
-    stat: 'text-white',
+    card: 'bg-red text-ink',
+    muted: 'text-ink/80',
+    rule: 'border-ink/25',
+    chip: 'bg-ink text-red',
+    stat: 'text-ink',
   },
   ink: {
-    card: 'bg-ink text-white',
-    muted: 'text-white/60',
-    rule: 'border-white/15',
-    chip: 'bg-lime text-ink',
-    stat: 'text-lime',
+    card: 'bg-ink text-paper',
+    muted: 'text-paper/60',
+    rule: 'border-paper/15',
+    chip: 'bg-accent text-ink',
+    stat: 'text-paper',
   },
 }
 
@@ -119,7 +97,7 @@ export default function FeatureCard({
         {cta && (
           <div className="mt-9 flex items-center gap-3 text-sm font-semibold">
             <span
-              className={`grid h-9 w-9 place-items-center border-2 border-current transition-transform duration-300 ease-smooth group-hover:scale-110 ${t.chip}`}
+              className={`grid h-9 w-9 place-items-center border border-current transition-transform duration-300 ease-smooth group-hover:scale-110 ${t.chip}`}
             >
               <svg
                 className="h-3.5 w-3.5 transition-transform duration-500 ease-smooth group-hover:rotate-45"
