@@ -61,7 +61,7 @@ function SlowOrbit() {
 export default function WaveField() {
   return (
     <div className="h-full w-full">
-      <Canvas dpr={[1, 1.75]} camera={{ position: [0, 5.2, 9], fov: 45 }} gl={{ alpha: true }}>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 5.2, 9], fov: 45 }} gl={{ alpha: true }}>
         <ambientLight intensity={1.4} />
         <directionalLight position={[4, 9, 5]} intensity={2.4} />
         <directionalLight position={[-5, 3, -4]} intensity={0.6} />

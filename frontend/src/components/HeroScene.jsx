@@ -120,7 +120,7 @@ function Rig({ children }) {
 export default function HeroScene() {
   return (
     <Canvas
-      dpr={[1, 1.75]}
+      dpr={[1, 1.5]}
       camera={{ position: [0, 0.5, 10], fov: 50 }}
       gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
     >

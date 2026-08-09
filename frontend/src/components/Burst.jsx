@@ -68,7 +68,7 @@ function Tilt() {
 export default function Burst() {
   return (
     <div className="h-full w-full">
-      <Canvas dpr={[1, 1.75]} camera={{ position: [0, 4.6, 5.2], fov: 50 }} gl={{ alpha: true }}>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 4.6, 5.2], fov: 50 }} gl={{ alpha: true }}>
         <ambientLight intensity={1.5} />
         <directionalLight position={[3, 9, 4]} intensity={2.3} />
         <directionalLight position={[-6, 2, -3]} intensity={0.6} />
