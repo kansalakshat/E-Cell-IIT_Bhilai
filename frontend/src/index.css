@@ -249,6 +249,55 @@ body {
     }
   }
 
+  /* Card rows become snap-scrolling rails on phones and return to their
+     grid at md. Pair in markup with `md:grid md:grid-cols-*` — the utility
+     layer wins over this block, which is what restores the grid. */
+  .rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Bleed to the screen edge so the last card isn't visually trapped */
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    scroll-padding-inline: 1.5rem;
+    /* overflow-x:auto forces overflow-y:auto, which would clip the panel
+       lift and its offset shadow — this gives them room. */
+    padding-bottom: 1.25rem;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+  .rail > * {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+
+  /* Sections switch to px-10 at sm, so the bleed has to follow */
+  @media (min-width: 640px) and (max-width: 767px) {
+    .rail {
+      margin-inline: -2.5rem;
+      padding-inline: 2.5rem;
+      scroll-padding-inline: 2.5rem;
+    }
+    .rail > * {
+      flex-basis: 56%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .rail {
+      overflow-x: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+      padding-bottom: 0;
+    }
+    .rail > * {
+      flex: none;
+    }
+  }
+
   .scene-bg {
     opacity: 0.5;
     -webkit-mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);

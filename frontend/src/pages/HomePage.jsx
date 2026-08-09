@@ -273,7 +273,7 @@ export default function HomePage() {
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {offerings.map((o, i) => (
             <FeatureCard key={o.title} {...o} index={i} />
           ))}
@@ -326,7 +326,7 @@ export default function HomePage() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2">
           {journeys.map((j, i) => (
             <EntrepreneurshipCard key={j.title} {...j} index={i} />
           ))}
@@ -361,7 +361,7 @@ export default function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-3">
             {voices.map((v) => (
               <figure
                 key={v.name}

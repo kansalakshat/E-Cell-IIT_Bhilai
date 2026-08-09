@@ -115,7 +115,7 @@ export default function EventsPage() {
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28">
         {shown.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {shown.map((e, i) => (
               <EventCard key={e.id} event={e} index={i} />
             ))}

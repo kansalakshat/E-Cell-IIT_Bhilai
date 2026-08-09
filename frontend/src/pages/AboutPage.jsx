@@ -69,7 +69,7 @@ export default function AboutPage() {
 
       {/* Vision / Mission */}
       <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div tabIndex={0} className="rail md:grid gap-5 lg:grid-cols-2">
           <Reveal>
             <div className="brutal h-full bg-lime p-10 sm:p-12">
               <p className="eyebrow mb-8">Vision</p>
@@ -140,7 +140,7 @@ export default function AboutPage() {
           <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {doing.map(([title, body], i) => (
             <Reveal key={title}>
               <div className="brutal group h-full bg-paper p-9">
@@ -169,7 +169,7 @@ export default function AboutPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2">
             <Reveal>
               <div className="brutal bg-paper p-10 text-ink">
                 <p className="eyebrow mb-8">You do not need</p>
