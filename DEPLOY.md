@@ -46,7 +46,7 @@ function logs and are lost after the retention window.
 
 Before real use, add a delivery path in `api/contact.js`:
 
-- **Resend** or **SendGrid** to email `contact@ecell.iitbhilai.ac.in`
+- **Resend** or **SendGrid** to email `ecell@iitbhilai.ac.in`
 - or a database (Vercel Postgres, Supabase) to store them
 
 Either needs an API key set under **Project → Settings → Environment

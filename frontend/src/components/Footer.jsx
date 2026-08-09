@@ -43,10 +43,10 @@ export default function Footer() {
               the people who can fund, challenge and ship them.
             </p>
             <a
-              href="mailto:contact@ecell.iitbhilai.ac.in"
+              href="mailto:ecell@iitbhilai.ac.in"
               className="brutal mt-8 inline-block bg-lime px-4 py-2 text-sm font-bold"
             >
-              contact@ecell.iitbhilai.ac.in
+              ecell@iitbhilai.ac.in
             </a>
           </div>
 

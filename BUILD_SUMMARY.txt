@@ -299,7 +299,7 @@ Documentation:
   - Tailwind: https://tailwindcss.com
 
 Contact:
-  - Email: contact@ecell.iitbhilai.ac.in
+  - Email: ecell@iitbhilai.ac.in
   - Issues: Check repository
 
 FINAL NOTES

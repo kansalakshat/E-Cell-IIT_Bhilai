@@ -240,7 +240,7 @@ npm run dev:frontend
 
 For issues or questions:
 - Create an issue in the repository
-- Email: contact@ecell.iitbhilai.ac.in
+- Email: ecell@iitbhilai.ac.in
 
 ## License
 

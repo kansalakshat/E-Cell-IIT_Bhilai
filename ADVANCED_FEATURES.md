@@ -382,7 +382,7 @@ export default function NewPage() {
 
 ## 📞 Support
 
-- Email: contact@ecell.iitbhilai.ac.in
+- Email: ecell@iitbhilai.ac.in
 - Repository: GitHub (initialized locally)
 - Issues: Check documentation files
 

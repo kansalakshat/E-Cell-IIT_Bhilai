@@ -218,7 +218,7 @@ NODE_ENV=development
 ## 📞 Support
 
 For issues or questions:
-- Email: contact@ecell.iitbhilai.ac.in
+- Email: ecell@iitbhilai.ac.in
 - Create an issue in the repository
 
 ## 📄 License

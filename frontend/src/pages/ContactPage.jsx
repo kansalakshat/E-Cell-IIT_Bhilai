@@ -5,7 +5,7 @@ import LazyScene from '../components/LazyScene'
 const Shards = lazy(() => import('../components/Shards'))
 
 const channels = [
-  { label: 'Email', value: 'contact@ecell.iitbhilai.ac.in', href: 'mailto:contact@ecell.iitbhilai.ac.in' },
+  { label: 'Email', value: 'ecell@iitbhilai.ac.in', href: 'mailto:ecell@iitbhilai.ac.in' },
   { label: 'Campus', value: 'IIT Bhilai, Kutelabhata, Durg', href: '#' },
   { label: 'Social', value: '@ecell_iitbhilai', href: '#' },
 ]
