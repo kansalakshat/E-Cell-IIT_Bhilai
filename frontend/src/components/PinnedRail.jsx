@@ -46,12 +46,12 @@ export default function PinnedRail({ header, children, cardClass = '' }) {
   return (
     <section ref={section} className="relative">
       <div className="flex min-h-screen flex-col justify-center overflow-hidden py-20">
-        <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">{header}</div>
+        {header && <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">{header}</div>}
 
         <div
           ref={track}
           tabIndex={reduced ? 0 : undefined}
-          className={`mt-14 flex gap-5 px-6 sm:px-10 ${
+          className={`flex gap-5 px-6 sm:px-10 ${header ? 'mt-14' : ''} ${
             reduced ? 'overflow-x-auto pb-5' : 'w-max'
           }`}
         >

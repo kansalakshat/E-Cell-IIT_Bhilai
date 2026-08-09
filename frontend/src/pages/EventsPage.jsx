@@ -2,6 +2,7 @@ import { useState, useMemo, lazy } from 'react'
 import PageHeader from '../components/PageHeader'
 import EventCard from '../components/EventCard'
 import LazyScene from '../components/LazyScene'
+import PinnedRail from '../components/PinnedRail'
 
 const Burst = lazy(() => import('../components/Burst'))
 
@@ -112,18 +113,21 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28">
-        {shown.length > 0 ? (
-          <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {shown.map((e, i) => (
-              <EventCard key={e.id} event={e} index={i} />
-            ))}
-          </div>
-        ) : (
+      {/* Grid — page pins while the cards travel sideways */}
+      {shown.length > 0 ? (
+        /* Keyed on the filter: changing it changes the card count, so the
+           pin distance has to be remeasured. Remounting is cheaper than
+           threading a refresh through ScrollTrigger. */
+        <PinnedRail key={active} cardClass="w-[80vw] sm:w-[52vw] lg:w-[26rem]" header={null}>
+          {shown.map((e, i) => (
+            <EventCard key={e.id} event={e} index={i} />
+          ))}
+        </PinnedRail>
+      ) : (
+        <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28">
           <p className="py-20 text-center text-ink-40">Nothing scheduled in this category yet.</p>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* Newsletter — burst pulses behind the form */}
       <section className="relative overflow-hidden border-t border-stone bg-bone py-24 sm:py-32">

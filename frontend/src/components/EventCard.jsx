@@ -27,7 +27,7 @@ export default function EventCard({ event, index = 0 }) {
   return (
     <article
       ref={ref}
-      className={`brutal group flex translate-y-8 flex-col justify-between p-8 opacity-0 ${t.card}`}
+      className={`brutal group flex h-full translate-y-8 flex-col justify-between p-8 opacity-0 ${t.card}`}
     >
       <div>
         <div className="flex items-start justify-between gap-4">

@@ -2,6 +2,7 @@ import { useRef, useEffect, lazy } from 'react'
 import gsap from 'gsap'
 import PageHeader from '../components/PageHeader'
 import LazyScene from '../components/LazyScene'
+import PinnedRail from '../components/PinnedRail'
 import { useInView } from '../hooks/useInView'
 import { toneFor } from '../tones'
 
@@ -134,30 +135,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What we do */}
-      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
-        <Reveal className="mb-14">
-          <p className="eyebrow mb-5">Programmes</p>
-          <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
-        </Reveal>
-
-        <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {doing.map(([title, body], i) => {
-            const t = toneFor(i)
-            return (
-              <Reveal key={title}>
-                <div className={`brutal group h-full p-9 ${t.card}`}>
-                  <span className={`display text-2xl tabular-nums ${t.stat}`}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="display mt-6 text-2xl uppercase">{title}</h3>
-                  <p className={`mt-4 text-[15px] leading-relaxed ${t.muted}`}>{body}</p>
-                </div>
-              </Reveal>
-            )
-          })}
-        </div>
-      </section>
+      {/* What we do — page pins while these travel sideways */}
+      <PinnedRail
+        cardClass="w-[80vw] sm:w-[52vw] lg:w-[28rem]"
+        header={
+          <Reveal>
+            <p className="eyebrow mb-5">Programmes</p>
+            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
+          </Reveal>
+        }
+      >
+        {doing.map(([title, body], i) => {
+          const t = toneFor(i)
+          return (
+            <div key={title} className={`brutal h-full p-9 ${t.card}`}>
+              <span className={`display text-2xl tabular-nums ${t.stat}`}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="display mt-6 text-2xl uppercase">{title}</h3>
+              <p className={`mt-4 text-[15px] leading-relaxed ${t.muted}`}>{body}</p>
+            </div>
+          )
+        })}
+      </PinnedRail>
 
       {/* Who can join */}
       <section className="bg-ink py-24 text-paper sm:py-32">
