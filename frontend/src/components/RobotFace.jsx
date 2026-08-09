@@ -13,7 +13,7 @@ const SPIN = 0.12
 
 /* Light-mode palette: whatever was pale becomes this black, whatever was
    dark becomes this off-white. */
-const SHELL_DARK = new THREE.Color('#0A0A0B')
+const SHELL_DARK = new THREE.Color('#050506')
 const SHELL_LIGHT = new THREE.Color('#EFEEE9')
 
 export default function RobotFace() {
@@ -76,7 +76,7 @@ export default function RobotFace() {
         const base = m.userData.authoredColor
         if (flip) {
           const luminance = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b
-          m.color.copy(luminance > 0.3 ? SHELL_DARK : SHELL_LIGHT)
+          m.color.copy(luminance > 0.06 ? SHELL_DARK : SHELL_LIGHT)
         } else {
           m.color.copy(base)
         }
