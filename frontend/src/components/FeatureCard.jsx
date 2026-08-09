@@ -2,45 +2,7 @@ import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { useInView } from '../hooks/useInView'
 import { useTilt } from '../hooks/useInteractions'
-
-/* Surfaces, not colour blocks. Each tone is a barely-different dark
-   plane; only the red card and the inverted card break the field. */
-const SURFACE = {
-  muted: 'text-ink-70',
-  rule: 'border-stone',
-  chip: 'bg-accent text-ink',
-  stat: 'text-ink',
-}
-
-/* grass and red stay dark in BOTH themes, so their copy is literal white
-   rather than the `ink` token — which flips to black in light mode. */
-const ON_DARK = {
-  muted: 'text-white/80',
-  rule: 'border-white/25',
-  stat: 'text-white',
-}
-
-const TONES = {
-  lime: { card: 'bg-lime text-ink', ...SURFACE },
-  grass: { card: 'bg-grass text-white', ...ON_DARK, chip: 'bg-white text-grass' },
-  blush: { card: 'bg-blush text-ink', ...SURFACE },
-  butter: { card: 'bg-butter text-ink', ...SURFACE },
-  violet: { card: 'bg-violet text-ink', ...SURFACE },
-  red: {
-    card: 'bg-red text-white',
-    ...ON_DARK,
-    chip: 'bg-white text-red',
-  },
-  ink: {
-    card: 'bg-ink text-paper',
-    muted: 'text-paper/60',
-    rule: 'border-paper/15',
-    chip: 'bg-accent text-ink',
-    stat: 'text-paper',
-  },
-}
-
-const CYCLE = ['lime', 'red', 'blush', 'ink', 'butter', 'violet']
+import { toneFor } from '../tones'
 
 export default function FeatureCard({
   title,
@@ -55,7 +17,7 @@ export default function FeatureCard({
   const tiltRef = useTilt(5)
   const inView = useInView(wrapRef, { threshold: 0.15 })
   /* No tone given? Cycle the palette so a grid never comes out one flat colour. */
-  const t = TONES[tone] ?? TONES[CYCLE[index % CYCLE.length]]
+  const t = toneFor(index, tone)
 
   useEffect(() => {
     if (!inView) return

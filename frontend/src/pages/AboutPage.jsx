@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import PageHeader from '../components/PageHeader'
 import LazyScene from '../components/LazyScene'
 import { useInView } from '../hooks/useInView'
+import { toneFor } from '../tones'
 
 const Helix = lazy(() => import('../components/Helix'))
 
@@ -141,21 +142,20 @@ export default function AboutPage() {
         </Reveal>
 
         <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {doing.map(([title, body], i) => (
-            <Reveal key={title}>
-              <div className="brutal group h-full bg-paper p-9">
-                <span className="display text-2xl tabular-nums text-ink">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="display mt-6 text-2xl uppercase">
-                  {title}
-                </h3>
-                <p className="mt-4 text-[15px] leading-relaxed text-ink-70">
-                  {body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+          {doing.map(([title, body], i) => {
+            const t = toneFor(i)
+            return (
+              <Reveal key={title}>
+                <div className={`brutal group h-full p-9 ${t.card}`}>
+                  <span className={`display text-2xl tabular-nums ${t.stat}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="display mt-6 text-2xl uppercase">{title}</h3>
+                  <p className={`mt-4 text-[15px] leading-relaxed ${t.muted}`}>{body}</p>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
       </section>
 
