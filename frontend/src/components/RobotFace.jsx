@@ -11,6 +11,11 @@ export const MODEL_URL = '/models/robot-face.glb'
 const FILL = 0.85
 const SPIN = 0.12
 
+/* Light-mode palette: whatever was pale becomes this black, whatever was
+   dark becomes this off-white. */
+const SHELL_DARK = new THREE.Color('#0A0A0B')
+const SHELL_LIGHT = new THREE.Color('#EFEEE9')
+
 export default function RobotFace() {
   const ref = useRef()
   /* Materials untouched — original colours, original gloss. The only
@@ -52,13 +57,16 @@ export default function RobotFace() {
     }
   }, [model])
 
-  /* Light theme inverts the model: the white shell goes dark and the black
-     neck goes pale, so the face reads against a near-white page the way the
-     original reads against the dark one. Dark restores the authored colours
-     exactly, which is why the originals are stashed rather than re-inverted. */
+  /* Light theme flips the model so it reads against a near-white page the
+     way the original reads against a dark one.
+
+     A straight 1-x inversion sends every mid-tone somewhere muddy, so this
+     thresholds on luminance instead: anything light becomes near-black,
+     anything dark becomes off-white. Two tones, crisp either way. Dark mode
+     restores the authored colours verbatim. */
   const theme = useTheme()
   useEffect(() => {
-    const invert = theme === 'light'
+    const flip = theme === 'light'
     model.traverse((o) => {
       if (!o.isMesh || !o.material) return
       const materials = Array.isArray(o.material) ? o.material : [o.material]
@@ -66,8 +74,12 @@ export default function RobotFace() {
         if (!m.color) return
         if (!m.userData.authoredColor) m.userData.authoredColor = m.color.clone()
         const base = m.userData.authoredColor
-        if (invert) m.color.setRGB(1 - base.r, 1 - base.g, 1 - base.b)
-        else m.color.copy(base)
+        if (flip) {
+          const luminance = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b
+          m.color.copy(luminance > 0.3 ? SHELL_DARK : SHELL_LIGHT)
+        } else {
+          m.color.copy(base)
+        }
         m.needsUpdate = true
       })
     })
