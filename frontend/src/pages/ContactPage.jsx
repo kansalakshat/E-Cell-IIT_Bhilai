@@ -10,12 +10,16 @@ const channels = [
   { label: 'Social', value: '@ecell_iitbhilai', href: '#' },
 ]
 
+const FALLBACK_ERROR = 'Something went wrong. Try emailing us directly.'
+
 export default function ContactPage() {
   const [status, setStatus] = useState('idle')
+  const [error, setError] = useState(FALLBACK_ERROR)
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    const form = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const data = new FormData(form)
     setStatus('sending')
 
     try {
@@ -23,14 +27,26 @@ export default function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: form.get('name'),
-          email: form.get('email'),
-          message: form.get('message'),
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
         }),
       })
-      setStatus(res.ok ? 'sent' : 'error')
-      if (res.ok) e.target.reset()
+
+      if (res.ok) {
+        setStatus('sent')
+        form.reset()
+        return
+      }
+
+      /* The API distinguishes a bad address from mail being down — passing
+         its reason through is the difference between "try again" and
+         "email them instead". */
+      const body = await res.json().catch(() => null)
+      setError(body?.message || FALLBACK_ERROR)
+      setStatus('error')
     } catch {
+      setError(FALLBACK_ERROR)
       setStatus('error')
     }
   }
@@ -115,8 +131,8 @@ export default function ContactPage() {
                   </p>
                 )}
                 {status === 'error' && (
-                  <p className="text-sm font-medium text-ink-70">
-                    Something went wrong. Try emailing us directly.
+                  <p role="alert" className="text-sm font-medium text-ink-70">
+                    {error}
                   </p>
                 )}
               </div>

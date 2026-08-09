@@ -38,19 +38,52 @@ Express server on port 5000 (see `vite.config.js`).
 If you later want `/api/events` and `/api/stats` live, add `api/events.js` and
 `api/stats.js` alongside `contact.js` — same pattern, no config.
 
-## Contact form: submissions go nowhere
+## Contact form: needs two env vars before it delivers
 
-The function validates input and returns success, but doesn't store or send
-anything — the Express version only logged too. Messages appear in the Vercel
-function logs and are lost after the retention window.
+`api/contact.js` emails submissions to `ecell@iitbhilai.ac.in` through
+[Resend](https://resend.com), called over its REST API so there's no extra
+dependency.
 
-Before real use, add a delivery path in `api/contact.js`:
+**Until `RESEND_API_KEY` is set the form returns 503** and tells visitors to
+email directly. That's deliberate — returning success with no key is how
+messages get lost silently, with the sender believing they've been heard.
 
-- **Resend** or **SendGrid** to email `ecell@iitbhilai.ac.in`
-- or a database (Vercel Postgres, Supabase) to store them
+### Setup
 
-Either needs an API key set under **Project → Settings → Environment
-Variables**. Never commit it — `.env` files are gitignored.
+1. Create a Resend account.
+2. **Verify a domain you control** under Resend → Domains, and add the DNS
+   records it gives you. This is the step that can't be skipped: Resend's
+   shared `onboarding@resend.dev` sender only delivers to the address that
+   owns the Resend account, so it will *not* reach the E-Cell inbox.
+   - If `iitbhilai.ac.in` DNS isn't yours to change, ask whoever runs it for
+     the records, or verify a domain the club does own.
+3. In Vercel → **Settings → Environment Variables**, add:
+
+   | Name | Value |
+   |---|---|
+   | `RESEND_API_KEY` | `re_...` from Resend → API Keys |
+   | `CONTACT_FROM` | `E-Cell <noreply@your-verified-domain>` |
+
+   `CONTACT_TO` is optional and defaults to `ecell@iitbhilai.ac.in`.
+4. Redeploy — env vars are read at runtime, but existing deployments don't
+   pick up new ones.
+
+Never commit the key; `.env` files are gitignored.
+
+### Behaviour
+
+- Replies go to the sender: the mail sets `reply_to` to whatever address the
+  visitor typed, so hitting reply in the inbox reaches them, not the site.
+- Inputs are length-capped (name 120, email 200, message 5000) since they're
+  relayed into an outbound email.
+- Provider errors are logged server-side; visitors get "email us directly"
+  rather than the raw reason.
+
+### Not included
+
+There's no rate limiting — serverless functions hold no shared state, so it
+needs a store (Vercel KV, Upstash) to count against. If the form starts
+attracting spam, that plus a honeypot field are the first two things to add.
 
 ## Notes
 
