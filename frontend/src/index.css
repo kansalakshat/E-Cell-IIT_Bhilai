@@ -2,6 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────
+   Two complete design systems, one markup.
+
+   dark  — blended: Linear ground, Apple space, Nike type,
+           Stripe depth. Soft radii, hairlines, one red accent.
+   light — brutalist: square corners, 2px rules, hard offset
+           shadows, Righteous display, pink accent.
+
+   Everything that differs is a variable below. Components never
+   branch on theme; they consume tokens.
+   ───────────────────────────────────────────────────────────── */
+
+:root,
+:root[data-theme='dark'] {
+  --c-paper: 8 9 10;
+  --c-bone: 14 15 17;
+  --c-stone: 35 37 42;
+  --c-ink: 245 245 247;
+  --c-ink-70: 161 161 166;
+  --c-ink-40: 134 134 139;
+
+  --c-lime: 23 25 29;
+  --c-grass: 15 26 21;
+  --c-blush: 26 20 24;
+  --c-butter: 26 23 18;
+  --c-violet: 21 21 31;
+  --c-sky: 18 26 32;
+
+  --c-accent: 230 0 42;
+  --c-red: 230 0 42;
+
+  --font-display: 'Space Grotesk';
+  --font-body: 'Inter';
+  --display-weight: 700;
+  --display-tracking: -0.035em;
+
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  --sh-soft: 0 1px 0 0 rgb(255 255 255 / 0.05) inset, 0 18px 50px -24px rgb(0 0 0 / 0.9);
+  --sh-lift: 0 1px 0 0 rgb(255 255 255 / 0.08) inset, 0 30px 70px -28px rgb(0 0 0 / 1);
+  --sh-glow: 0 0 0 1px rgb(230 0 42 / 0.35), 0 20px 60px -20px rgb(230 0 42 / 0.45);
+
+  /* Linear: one fixed glow anchoring the page, nothing repeating */
+  --bg-image: radial-gradient(58rem 40rem at 50% -14rem, rgb(230 0 42 / 0.12), transparent 70%);
+  --bg-size: auto;
+  --stroke-color: #3a3d44;
+  --grad-type: linear-gradient(96deg, #ffffff 8%, #ff5470 46%, #e6002a 92%);
+}
+
+:root[data-theme='light'] {
+  --c-paper: 250 250 247;
+  --c-bone: 239 238 231;
+  --c-stone: 10 10 11;
+  --c-ink: 10 10 11;
+  --c-ink-70: 74 74 76;
+  --c-ink-40: 107 107 110;
+
+  --c-lime: 216 255 62;
+  --c-grass: 15 81 50;
+  --c-blush: 255 157 176;
+  --c-butter: 255 224 102;
+  --c-violet: 196 181 255;
+  --c-sky: 154 215 245;
+
+  --c-accent: 236 72 153;
+  --c-red: 230 0 41;
+
+  --font-display: 'Righteous';
+  --font-body: 'Poppins';
+  --display-weight: 400;
+  --display-tracking: -0.02em;
+
+  --r-lg: 0px;
+  --r-xl: 0px;
+
+  --sh-soft: 4px 4px 0 0 rgb(10 10 11);
+  --sh-lift: 8px 8px 0 0 rgb(10 10 11);
+  --sh-glow: 8px 8px 0 0 rgb(236 72 153);
+
+  /* Brutalism: the visible blueprint grid */
+  --bg-image: linear-gradient(rgb(10 10 11 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(10 10 11 / 0.05) 1px, transparent 1px);
+  --bg-size: 72px 72px;
+  --stroke-color: #0a0a0b;
+  --grad-type: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,43 +102,55 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  color: #f5f5f7;
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: rgb(var(--c-ink));
   overflow-x: hidden;
   letter-spacing: -0.011em;
-  background-color: #08090a;
-  /* Linear: a single soft glow anchoring the top of the page, then nothing.
-     Restraint is the point — no repeating pattern competing with content. */
-  background-image: radial-gradient(
-    58rem 40rem at 50% -14rem,
-    rgb(230 0 42 / 0.12),
-    transparent 70%
-  );
+  background-color: rgb(var(--c-paper));
+  background-image: var(--bg-image);
+  background-size: var(--bg-size);
+  background-repeat: repeat;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+:root[data-theme='dark'] body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
+/* Light mode is brutalist: rules are 2px, not hairlines. One override
+   beats prefixing every border utility in the markup with a variant. */
+:root[data-theme='light'] .border {
+  border-width: 2px;
+}
+:root[data-theme='light'] .border-t {
+  border-top-width: 2px;
+}
+:root[data-theme='light'] .border-b {
+  border-bottom-width: 2px;
+}
+:root[data-theme='light'] .border-y {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090a;
+  background: rgb(var(--c-bone));
 }
 ::-webkit-scrollbar-thumb {
-  background: #23252a;
-  border-radius: 999px;
-  border: 3px solid #08090a;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #35383f;
+  background: rgb(var(--c-stone));
+  border: 3px solid rgb(var(--c-paper));
+  border-radius: var(--r-xl);
 }
 
 ::selection {
-  background: #e6002a;
+  background: rgb(var(--c-accent));
   color: #ffffff;
 }
 
-/* currentColor so the ring reads on both dark ground and light blocks */
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
@@ -58,19 +158,20 @@ body {
 }
 
 @layer components {
-  /* Nike: display type is huge, uppercase and tightly tracked.
-     Space Grotesk 700 carries it without the novelty of a face like Righteous. */
   .display {
-    font-family: 'Space Grotesk', Inter, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.035em;
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
     line-height: 0.92;
   }
 
-  /* Apple: lead paragraphs sit at weight 300 and read as calm, not loud */
+  /* Apple/Stripe: lead paragraphs read calm at weight 300 */
   .lead {
     font-weight: 300;
     letter-spacing: -0.014em;
+  }
+  :root[data-theme='light'] .lead {
+    font-weight: 400;
   }
 
   .eyebrow {
@@ -78,7 +179,7 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.22em;
-    color: #86868b;
+    color: rgb(var(--c-ink-40));
   }
   .eyebrow::before {
     content: '';
@@ -87,65 +188,91 @@ body {
     height: 1px;
     margin-right: 0.75rem;
     vertical-align: 0.3em;
-    background: #e6002a;
+    background: rgb(var(--c-accent));
+  }
+  :root[data-theme='light'] .eyebrow {
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    color: rgb(var(--c-ink));
+  }
+  :root[data-theme='light'] .eyebrow::before {
+    height: 3px;
+    width: 1.75rem;
+    vertical-align: 0.2em;
   }
 
-  /* Stripe/Linear panel: hairline + inset highlight + deep soft shadow.
-     Lifts on hover instead of pressing into a block shadow. */
+  /* The panel. Dark lifts off the page; light presses into its shadow. */
   .brutal {
-    border: 1px solid #23252a;
-    border-radius: 14px;
-    background-clip: padding-box;
-    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.05) inset,
-      0 18px 50px -24px rgb(0 0 0 / 0.9);
+    border: 1px solid rgb(var(--c-stone));
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-soft);
     transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
       border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .brutal:hover {
     transform: translateY(-3px);
-    border-color: #35383f;
-    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.08) inset,
-      0 30px 70px -28px rgb(0 0 0 / 1);
+    box-shadow: var(--sh-lift);
+  }
+  :root[data-theme='light'] .brutal {
+    border-width: 2px;
+    box-shadow: var(--sh-lift);
+  }
+  :root[data-theme='light'] .brutal:hover {
+    transform: translate(4px, 4px);
+    box-shadow: var(--sh-soft);
   }
 
-  /* Same panel sitting on an inverted (light) block */
+  /* Panel sitting on an inverted block */
   .brutal-light {
-    border: 1px solid rgb(8 9 10 / 0.12);
-    border-radius: 14px;
+    border: 1px solid rgb(var(--c-paper) / 0.12);
+    border-radius: var(--r-lg);
     box-shadow: 0 18px 50px -24px rgb(0 0 0 / 0.35);
     transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .brutal-light:hover {
     transform: translateY(-3px);
-    box-shadow: 0 30px 70px -28px rgb(0 0 0 / 0.5);
+  }
+  :root[data-theme='light'] .brutal-light {
+    border: 2px solid rgb(var(--c-paper));
+    box-shadow: 8px 8px 0 0 rgb(var(--c-accent));
+  }
+  :root[data-theme='light'] .brutal-light:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 0 rgb(var(--c-accent));
   }
 
-  /* Background 3D layer: dissolves at the edges, no seam with its section */
   .scene-bg {
     opacity: 0.5;
     -webkit-mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
     mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
   }
 
-  /* Outlined display type for oversized numerals */
   .stroke-type {
     color: transparent;
-    -webkit-text-stroke: 1px #3a3d44;
+    -webkit-text-stroke: 1px var(--stroke-color);
+  }
+  :root[data-theme='light'] .stroke-type {
+    -webkit-text-stroke-width: 2px;
   }
 
   .rule {
     height: 1px;
-    background: #23252a;
+    background: rgb(var(--c-stone));
   }
 
-  /* Stripe's signature: type filled with a gradient rather than a flat accent */
+  /* Stripe: gradient-filled type. Light mode has no equivalent, so it
+     falls back to the flat accent rather than inventing a second look. */
   .grad-text {
-    background: linear-gradient(96deg, #ffffff 8%, #ff5470 46%, #e6002a 92%);
+    background-image: var(--grad-type);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+  :root[data-theme='light'] .grad-text {
+    background-image: none;
+    color: rgb(var(--c-accent));
   }
 }
 
@@ -161,13 +288,11 @@ h3:hover {
   transform: scale(1.02);
 }
 
-/* Masked line reveal */
 .line-mask {
   display: block;
   overflow: hidden;
 }
 
-/* Infinite marquee strip */
 @keyframes marquee {
   from {
     transform: translateX(0);

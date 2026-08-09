@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
+import { useSceneColors } from '../theme'
 
 const PER_STRAND = 90
 const COUNT = PER_STRAND * 2
@@ -44,7 +45,7 @@ function Strands() {
   return (
     <instancedMesh ref={mesh} args={[null, null, COUNT]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#E8E8ED" roughness={0.45} metalness={0.05} />
+      <meshStandardMaterial color={useSceneColors().ink} roughness={0.45} metalness={0.05} />
     </instancedMesh>
   )
 }
@@ -57,7 +58,7 @@ function Spine() {
   return (
     <mesh ref={ref} rotation={[0, 0, Math.PI / 2]}>
       <cylinderGeometry args={[0.018, 0.018, SPAN, 6]} />
-      <meshStandardMaterial color="#e6002a" roughness={0.4} />
+      <meshStandardMaterial color={useSceneColors().accent} roughness={0.4} />
     </mesh>
   )
 }

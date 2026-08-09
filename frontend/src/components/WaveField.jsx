@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
+import { useSceneColors } from '../theme'
 
 const COLS = 26
 const ROWS = 26
@@ -41,7 +42,7 @@ function Grid() {
   return (
     <instancedMesh ref={mesh} args={[null, null, COUNT]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#8A8A91" roughness={0.45} metalness={0.05} />
+      <meshStandardMaterial color={useSceneColors().muted} roughness={0.45} metalness={0.05} />
     </instancedMesh>
   )
 }

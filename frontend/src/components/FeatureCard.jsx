@@ -12,18 +12,24 @@ const SURFACE = {
   stat: 'text-ink',
 }
 
+/* grass and red stay dark in BOTH themes, so their copy is literal white
+   rather than the `ink` token — which flips to black in light mode. */
+const ON_DARK = {
+  muted: 'text-white/80',
+  rule: 'border-white/25',
+  stat: 'text-white',
+}
+
 const TONES = {
   lime: { card: 'bg-lime text-ink', ...SURFACE },
-  grass: { card: 'bg-grass text-ink', ...SURFACE },
+  grass: { card: 'bg-grass text-white', ...ON_DARK, chip: 'bg-white text-grass' },
   blush: { card: 'bg-blush text-ink', ...SURFACE },
   butter: { card: 'bg-butter text-ink', ...SURFACE },
   violet: { card: 'bg-violet text-ink', ...SURFACE },
   red: {
-    card: 'bg-red text-ink',
-    muted: 'text-ink/80',
-    rule: 'border-ink/25',
-    chip: 'bg-ink text-red',
-    stat: 'text-ink',
+    card: 'bg-red text-white',
+    ...ON_DARK,
+    chip: 'bg-white text-red',
   },
   ink: {
     card: 'bg-ink text-paper',

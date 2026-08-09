@@ -226,18 +226,18 @@ export default function HomePage() {
           {Array.from({ length: 4 }).map((_, i) => (
             <span
               key={i}
-              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-ink"
+              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-white"
             >
               <span>Speaker Sessions</span>
-              <span className="text-ink/40">/</span>
+              <span className="text-white/45">/</span>
               <span>E-Conclave</span>
-              <span className="text-ink/40">/</span>
+              <span className="text-white/45">/</span>
               <span>Hackathons</span>
-              <span className="text-ink/40">/</span>
+              <span className="text-white/45">/</span>
               <span>Case Competitions</span>
-              <span className="text-ink/40">/</span>
+              <span className="text-white/45">/</span>
               <span>Mentorship</span>
-              <span className="text-ink/40">/</span>
+              <span className="text-white/45">/</span>
             </span>
           ))}
         </div>
@@ -393,7 +393,7 @@ export default function HomePage() {
           </p>
           <a
             href="/contact"
-            className="brutal group mt-12 inline-flex items-center gap-4 bg-accent px-10 py-5 text-lg font-bold uppercase tracking-wide text-ink"
+            className="brutal group mt-12 inline-flex items-center gap-4 bg-accent px-10 py-5 text-lg font-bold uppercase tracking-wide text-white"
           >
             Join E-Cell
             <span className="grid h-8 w-8 place-items-center border border-stone">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTheme, toggleTheme } from '../theme'
 
 const links = [
   { label: 'Home', path: '/' },
@@ -13,6 +14,7 @@ export default function Navigation() {
   const [hidden, setHidden] = useState(false)
   const lastY = useRef(0)
   const { pathname } = useLocation()
+  const theme = useTheme()
 
   /* Hide on scroll down, reveal on scroll up */
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function Navigation() {
           hidden ? '-translate-y-[150%]' : 'translate-y-0'
         }`}
       >
-        <nav className="flex items-center gap-2 border border-stone bg-paper p-2 pl-5 shadow-soft">
+        <nav className="flex items-center gap-2 rounded-4xl border border-stone bg-paper p-2 pl-5 shadow-soft">
           {/* Mark */}
           <Link to="/" className="group flex items-center gap-2 shrink-0">
             <span className="grid h-8 w-8 place-items-center border border-stone bg-accent text-ink text-sm font-black">
@@ -72,9 +74,27 @@ export default function Navigation() {
             })}
           </div>
 
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={theme === 'dark' ? 'Light (brutalist)' : 'Dark (blend)'}
+            className="ml-auto md:ml-1 grid h-10 w-10 shrink-0 place-items-center rounded-4xl border border-stone text-ink transition-colors duration-200 hover:bg-lime"
+          >
+            {theme === 'dark' ? (
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
+                <circle cx="12" cy="12" r="4.5" />
+                <path strokeLinecap="round" d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.5 14.3A8.5 8.5 0 019.7 3.5a8.5 8.5 0 1010.8 10.8z" />
+              </svg>
+            )}
+          </button>
+
           <Link
             to="/contact"
-            className="ml-auto md:ml-1 hidden sm:inline-flex items-center border border-stone bg-ink px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-paper transition-colors duration-200 hover:bg-accent hover:text-ink"
+            className="md:ml-1 hidden sm:inline-flex items-center rounded-4xl border border-stone bg-ink px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-paper transition-colors duration-200 hover:bg-accent hover:text-ink"
           >
             Join Us
           </Link>

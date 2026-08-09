@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
+import { useSceneColors } from '../theme'
 
 const COUNT = 132
 const INNER = 1.6
@@ -36,7 +37,7 @@ function Spokes() {
   return (
     <instancedMesh ref={mesh} args={[null, null, COUNT]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#9A9AA1" roughness={0.5} />
+      <meshStandardMaterial color={useSceneColors().muted} roughness={0.5} />
     </instancedMesh>
   )
 }
@@ -50,7 +51,7 @@ function Hub() {
   return (
     <mesh ref={ref}>
       <octahedronGeometry args={[0.5, 0]} />
-      <meshStandardMaterial color="#e6002a" roughness={0.35} flatShading />
+      <meshStandardMaterial color={useSceneColors().accent} roughness={0.35} flatShading />
     </mesh>
   )
 }

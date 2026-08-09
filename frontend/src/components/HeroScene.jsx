@@ -1,9 +1,10 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
+import { useSceneColors } from '../theme'
 
-const INK = '#E8E8ED'
-const ACCENT = '#e6002a'
+
+
 
 /* Slowly tumbling wireframe knot — the centrepiece */
 function Knot() {
@@ -15,7 +16,7 @@ function Knot() {
   return (
     <mesh ref={ref} scale={1.35}>
       <torusKnotGeometry args={[1.5, 0.42, 140, 24]} />
-      <meshBasicMaterial color={INK} wireframe transparent opacity={0.22} />
+      <meshBasicMaterial color={useSceneColors().ink} wireframe transparent opacity={0.22} />
     </mesh>
   )
 }
@@ -32,7 +33,7 @@ function Core() {
   return (
     <mesh ref={ref}>
       <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial color={ACCENT} roughness={0.35} metalness={0.1} flatShading />
+      <meshStandardMaterial color={useSceneColors().accent} roughness={0.35} metalness={0.1} flatShading />
     </mesh>
   )
 }
@@ -75,7 +76,7 @@ function Swarm({ count = 70 }) {
   return (
     <instancedMesh ref={ref} args={[null, null, count]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={INK} roughness={0.5} />
+      <meshStandardMaterial color={useSceneColors().muted} roughness={0.5} />
     </instancedMesh>
   )
 }
@@ -83,6 +84,7 @@ function Swarm({ count = 70 }) {
 /* Thin orbit rings */
 function Rings() {
   const ref = useRef()
+  const { ink } = useSceneColors()
   useFrame((_, d) => {
     ref.current.rotation.z += d * 0.06
   })
@@ -90,11 +92,11 @@ function Rings() {
     <group ref={ref} rotation={[Math.PI / 2.4, 0, 0]}>
       <mesh>
         <torusGeometry args={[4.4, 0.006, 6, 120]} />
-        <meshBasicMaterial color={INK} transparent opacity={0.25} />
+        <meshBasicMaterial color={ink} transparent opacity={0.25} />
       </mesh>
       <mesh rotation={[0.6, 0.4, 0]}>
         <torusGeometry args={[5.6, 0.005, 6, 120]} />
-        <meshBasicMaterial color={INK} transparent opacity={0.14} />
+        <meshBasicMaterial color={ink} transparent opacity={0.14} />
       </mesh>
     </group>
   )

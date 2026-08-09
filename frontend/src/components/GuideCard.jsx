@@ -5,7 +5,7 @@ import { useInView } from '../hooks/useInView'
 const TONE = {
   Beginner: 'bg-lime text-ink border border-stone',
   Intermediate: 'bg-ink text-paper border border-stone',
-  Advanced: 'bg-red text-ink border border-stone',
+  Advanced: 'bg-red text-white border border-stone',
 }
 
 export default function GuideCard({

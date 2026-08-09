@@ -1,5 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
+import { useSceneColors } from '../theme'
 
 /* position, scale, spin, solid-red or black-wireframe */
 const PIECES = [
@@ -12,6 +13,7 @@ const PIECES = [
 
 function Piece({ geo, pos, scale, spin, solid }) {
   const ref = useRef()
+  const c = useSceneColors()
   useFrame(({ clock }, d) => {
     ref.current.rotation.x += d * spin[0]
     ref.current.rotation.y += d * spin[1]
@@ -27,9 +29,9 @@ function Piece({ geo, pos, scale, spin, solid }) {
       {geo === 'dodecahedron' && <dodecahedronGeometry args={[1, 0]} />}
       {geo === 'box' && <boxGeometry args={[1.3, 1.3, 1.3]} />}
       {solid ? (
-        <meshStandardMaterial color="#e6002a" roughness={0.35} flatShading />
+        <meshStandardMaterial color={c.accent} roughness={0.35} flatShading />
       ) : (
-        <meshBasicMaterial color="#E8E8ED" wireframe />
+        <meshBasicMaterial color={c.ink} wireframe />
       )}
     </mesh>
   )
