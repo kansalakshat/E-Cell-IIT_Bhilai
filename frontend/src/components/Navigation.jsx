@@ -32,7 +32,7 @@ export default function Navigation() {
         hidden ? '-translate-y-[150%]' : 'translate-y-0'
       }`}
     >
-      <nav className="flex items-center gap-1 rounded-4xl border border-stone bg-paper p-1.5 pl-2.5 shadow-soft sm:gap-2 sm:p-2 sm:pl-5">
+      <nav className="glass flex items-center gap-1 rounded-4xl border border-stone p-1.5 pl-2.5 shadow-soft sm:gap-2 sm:p-2 sm:pl-5">
         {/* Mark. The wordmark is the first thing cut on small screens —
             the badge alone still identifies the site, and every link fits. */}
         <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="E-Cell home">

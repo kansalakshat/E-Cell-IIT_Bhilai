@@ -91,7 +91,7 @@ export default function EventsPage() {
       />
 
       {/* Filter pills */}
-      <section className="sticky top-0 z-20 border-b border-stone bg-paper/90 backdrop-blur-xl">
+      <section className="glass sticky top-0 z-20 border-b border-stone">
         <div className="mx-auto max-w-7xl px-6 py-5 sm:px-10">
           <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {filters.map((f) => {

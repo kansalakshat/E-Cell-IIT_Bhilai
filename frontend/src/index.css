@@ -305,6 +305,32 @@ body {
     }
   }
 
+  /* Frosted surface for floating chrome. Dark only — brutalism has no blur,
+     so in light this stays a flat opaque panel. It carries its own
+     background rather than pairing with a bg-* utility, since a utility
+     would sit opaque on top and leave nothing for the blur to show. */
+  .glass {
+    background-color: rgb(var(--c-paper));
+  }
+
+  :root[data-theme='dark'] .glass {
+    background-color: rgb(var(--c-paper) / 0.6);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border-color: rgb(255 255 255 / 0.12);
+    /* The inset hairline is what reads as a glass edge catching light */
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.08) inset,
+      0 20px 50px -24px rgb(0 0 0 / 0.85);
+  }
+
+  /* Without backdrop-filter support the panel would be 60% transparent over
+     live content — unreadable. Fall back to near-opaque. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root[data-theme='dark'] .glass {
+      background-color: rgb(var(--c-paper) / 0.94);
+    }
+  }
+
   .scene-bg {
     opacity: 0.5;
     -webkit-mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
