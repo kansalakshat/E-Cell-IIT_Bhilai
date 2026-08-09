@@ -9,7 +9,7 @@ import FeatureCard from '../components/FeatureCard'
 import GuideCard from '../components/GuideCard'
 import EntrepreneurshipCard from '../components/EntrepreneurshipCard'
 import { useInView } from '../hooks/useInView'
-import { useScrollRail } from '../hooks/useScrollRail'
+import PinnedRail from '../components/PinnedRail'
 
 const offerings = [
   {
@@ -217,7 +217,7 @@ function Reveal({ children, className = '' }) {
 }
 
 export default function HomePage() {
-  const offeringsRail = useScrollRail()
+
 
   return (
     <div>
@@ -263,25 +263,28 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Offerings */}
-      <section className="mx-auto max-w-7xl px-6 pb-28 sm:px-10 sm:pb-36">
-        <Reveal className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-          <div>
-            <p className="eyebrow mb-5">What we do</p>
-            <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">Six ways in.</h2>
+      {/* Offerings — page pins while these travel sideways */}
+      <PinnedRail
+        cardClass="w-[80vw] sm:w-[52vw] lg:w-[30rem]"
+        header={
+          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <div>
+              <p className="eyebrow mb-5">What we do</p>
+              <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
+                Six ways in.
+              </h2>
+            </div>
+            <p className="max-w-sm text-ink-70">
+              No startup idea required. No business background required. Curiosity and
+              follow-through are the entire entry fee.
+            </p>
           </div>
-          <p className="max-w-sm text-ink-70">
-            No startup idea required. No business background required. Curiosity and
-            follow-through are the entire entry fee.
-          </p>
-        </Reveal>
-
-        <div ref={offeringsRail} tabIndex={0} className="rail rail-lock gap-5">
-          {offerings.map((o, i) => (
-            <FeatureCard key={o.title} {...o} index={i} />
-          ))}
-        </div>
-      </section>
+        }
+      >
+        {offerings.map((o, i) => (
+          <FeatureCard key={o.title} {...o} index={i} />
+        ))}
+      </PinnedRail>
 
       {/* 3D metrics section */}
       <section className="relative overflow-hidden bg-bone">

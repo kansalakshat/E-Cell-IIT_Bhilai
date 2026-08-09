@@ -69,7 +69,7 @@ export default function FeatureCard({
   }, [inView, index])
 
   return (
-    <div ref={wrapRef} className="translate-y-8 opacity-0 [perspective:1200px]">
+    <div ref={wrapRef} className="h-full translate-y-8 opacity-0 [perspective:1200px]">
       <article
         ref={tiltRef}
         className={`brutal group relative flex h-full flex-col overflow-hidden p-9 sm:p-10 ${t.card}`}
