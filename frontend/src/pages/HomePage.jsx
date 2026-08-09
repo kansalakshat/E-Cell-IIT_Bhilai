@@ -286,9 +286,10 @@ export default function HomePage() {
         ))}
       </PinnedRail>
 
-      {/* 3D metrics section */}
+      {/* Metrics — wave field drifts behind the numbers */}
       <section className="relative overflow-hidden bg-bone">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:py-32">
+        <LazyScene scene={WaveField} className="scene-bg pointer-events-none absolute inset-0" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 sm:px-10 lg:py-32">
           <Reveal>
             <p className="eyebrow mb-5">By the numbers</p>
             <h2 className="display text-[clamp(1.7rem,5.5vw,4.5rem)] uppercase">
@@ -297,7 +298,7 @@ export default function HomePage() {
               Loud output.
             </h2>
 
-            <div className="mt-14 grid grid-cols-2">
+            <div className="mt-14 grid max-w-3xl grid-cols-2 sm:grid-cols-4">
               {[
                 ['20+', 'active startups'],
                 ['₹40Cr+', 'raised by alumni'],
@@ -318,8 +319,6 @@ export default function HomePage() {
               ))}
             </div>
           </Reveal>
-
-          <LazyScene scene={WaveField} className="h-[360px] sm:h-[460px] lg:h-[560px]" />
         </div>
       </section>
 
