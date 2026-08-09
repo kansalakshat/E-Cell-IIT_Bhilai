@@ -40,7 +40,7 @@ function Piece({ geo, pos, scale, spin, solid }) {
 export default function Shards() {
   return (
     <div className="h-full w-full">
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6.2], fov: 50 }} gl={{ alpha: true }}>
+      <Canvas flat dpr={[1, 1.5]} camera={{ position: [0, 0, 6.2], fov: 50 }} gl={{ alpha: true }}>
         <ambientLight intensity={1.5} />
         <directionalLight position={[4, 6, 5]} intensity={2.2} />
         <directionalLight position={[-4, -2, 2]} intensity={0.5} />

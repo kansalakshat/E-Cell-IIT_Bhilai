@@ -120,15 +120,20 @@ function Rig({ children }) {
 }
 
 export default function HeroScene() {
+  /* `flat` = NoToneMapping. r3f defaults to ACES filmic, which warms whites
+     toward cream and washes out the model's authored black-and-white. */
   return (
     <Canvas
+      flat
       dpr={[1, 1.5]}
       camera={{ position: [0, 0.5, 10], fov: 50 }}
       gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
     >
-      <ambientLight intensity={1.6} />
-      <directionalLight position={[5, 8, 6]} intensity={2.2} />
-      <directionalLight position={[-6, -3, 2]} intensity={0.7} />
+      {/* Trimmed from 1.6/2.2/0.7: that summed well past 1 and, without tone
+          mapping to roll it off, blew the highlights out to flat white. */}
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[5, 8, 6]} intensity={1.4} />
+      <directionalLight position={[-6, -3, 2]} intensity={0.5} />
       <Rig>
         {/* Robot face replaces the knot + core. Both fall back together:
             the core was framed to sit inside the knot, so showing it around

@@ -66,7 +66,7 @@ function Spine() {
 export default function Helix() {
   return (
     <div className="h-full w-full">
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0.9, 6.6], fov: 42 }} gl={{ alpha: true }}>
+      <Canvas flat dpr={[1, 1.5]} camera={{ position: [0, 0.9, 6.6], fov: 42 }} gl={{ alpha: true }}>
         <ambientLight intensity={1.5} />
         <directionalLight position={[4, 8, 6]} intensity={2.2} />
         <directionalLight position={[-5, -2, 3]} intensity={0.6} />
