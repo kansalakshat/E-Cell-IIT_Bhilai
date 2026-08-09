@@ -15,3 +15,6 @@ yarn-error.log*
 *.swo
 *~
 .env.production.local
+
+# Local reference screenshots, not site assets
+frontend/public/models/*.png
