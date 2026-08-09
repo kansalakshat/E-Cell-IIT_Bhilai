@@ -13,8 +13,8 @@ const SPIN = 0.12
 
 /* Light-mode palette: whatever was pale becomes this black, whatever was
    dark becomes this off-white. */
-const SHELL_DARK = new THREE.Color('#050506')
-const SHELL_LIGHT = new THREE.Color('#EFEEE9')
+const SHELL_DARK = new THREE.Color('#000000')
+const SHELL_LIGHT = new THREE.Color('#FFFFFF')
 
 export default function RobotFace() {
   const ref = useRef()
