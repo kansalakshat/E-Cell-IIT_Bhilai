@@ -1,7 +1,8 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+import { useTheme } from '../theme'
 
 export const MODEL_URL = '/models/robot-face.glb'
 
@@ -25,6 +26,15 @@ export default function RobotFace() {
      are still shared, so this costs no GPU memory. */
   const model = useMemo(() => {
     const copy = scene.clone(true)
+    /* clone(true) copies the object graph but shares materials by
+       reference — recolouring them would leak into the cached original and
+       into every later mount. Give this copy its own. */
+    copy.traverse((o) => {
+      if (!o.isMesh || !o.material) return
+      o.material = Array.isArray(o.material)
+        ? o.material.map((m) => m.clone())
+        : o.material.clone()
+    })
     copy.position.set(0, 0, 0)
     copy.rotation.set(0, 0, 0)
     copy.scale.set(1, 1, 1)
@@ -41,6 +51,27 @@ export default function RobotFace() {
       center: box.getCenter(new THREE.Vector3()),
     }
   }, [model])
+
+  /* Light theme inverts the model: the white shell goes dark and the black
+     neck goes pale, so the face reads against a near-white page the way the
+     original reads against the dark one. Dark restores the authored colours
+     exactly, which is why the originals are stashed rather than re-inverted. */
+  const theme = useTheme()
+  useEffect(() => {
+    const invert = theme === 'light'
+    model.traverse((o) => {
+      if (!o.isMesh || !o.material) return
+      const materials = Array.isArray(o.material) ? o.material : [o.material]
+      materials.forEach((m) => {
+        if (!m.color) return
+        if (!m.userData.authoredColor) m.userData.authoredColor = m.color.clone()
+        const base = m.userData.authoredColor
+        if (invert) m.color.setRGB(1 - base.r, 1 - base.g, 1 - base.b)
+        else m.color.copy(base)
+        m.needsUpdate = true
+      })
+    })
+  }, [model, theme])
 
   /* viewport is in world units at the origin, and updates on resize — so
      this refits itself instead of cropping on a different screen. */
