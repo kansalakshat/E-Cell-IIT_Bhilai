@@ -17,15 +17,30 @@ export default function RobotFace() {
      is what was tinting the whites cream. */
   const { scene } = useGLTF(MODEL_URL)
 
+  /* useGLTF caches one scene for the whole app, and <primitive> writes the
+     scale straight onto it. Measuring with setFromObject reads world
+     transforms, so on a second mount it saw the already-scaled object and
+     divided the fit again — the model shrank on every return visit.
+     Cloning keeps the cached original pristine; geometries and materials
+     are still shared, so this costs no GPU memory. */
+  const model = useMemo(() => {
+    const copy = scene.clone(true)
+    copy.position.set(0, 0, 0)
+    copy.rotation.set(0, 0, 0)
+    copy.scale.set(1, 1, 1)
+    copy.updateMatrixWorld(true)
+    return copy
+  }, [scene])
+
   /* Measured rather than guessed: the export's scale and pivot are the
      artist's, so read the bounding box and derive both from it. */
   const { size, center } = useMemo(() => {
-    const box = new THREE.Box3().setFromObject(scene)
+    const box = new THREE.Box3().setFromObject(model)
     return {
       size: box.getSize(new THREE.Vector3()),
       center: box.getCenter(new THREE.Vector3()),
     }
-  }, [scene])
+  }, [model])
 
   /* viewport is in world units at the origin, and updates on resize — so
      this refits itself instead of cropping on a different screen. */
@@ -40,7 +55,7 @@ export default function RobotFace() {
     <group ref={ref}>
       {/* Offsetting by the measured centre puts the model's middle on the
           origin, so the group spins in place rather than orbiting. */}
-      <primitive object={scene} scale={scale} position={center.clone().multiplyScalar(-scale)} />
+      <primitive object={model} scale={scale} position={center.clone().multiplyScalar(-scale)} />
     </group>
   )
 }
