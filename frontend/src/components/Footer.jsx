@@ -31,9 +31,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center border border-stone bg-accent text-sm font-black text-ink">
-                E
-              </span>
+              <img
+                src="/logo.webp"
+                alt=""
+                width="36"
+                height="36"
+                className="h-9 w-9 object-contain"
+              />
               <span className="display text-2xl">
                 E<span className="text-ink-40">/</span>CELL
               </span>

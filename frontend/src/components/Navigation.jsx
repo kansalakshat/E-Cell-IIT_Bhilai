@@ -36,9 +36,15 @@ export default function Navigation() {
         {/* Mark. The wordmark is the first thing cut on small screens —
             the badge alone still identifies the site, and every link fits. */}
         <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="E-Cell home">
-          <span className="grid h-8 w-8 place-items-center border border-stone bg-accent text-sm font-black text-ink">
-            E
-          </span>
+          {/* alt is empty on purpose — the link is already labelled, so a
+              second announcement would just repeat itself. */}
+          <img
+            src="/logo.webp"
+            alt=""
+            width="32"
+            height="32"
+            className="h-8 w-8 object-contain"
+          />
           <span className="display hidden text-lg leading-none text-ink sm:inline">
             E<span className="text-ink-40">/</span>CELL
           </span>
