@@ -110,6 +110,10 @@ export default function Footer() {
         <div className="mt-10 flex flex-col gap-3 text-xs text-ink-40 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p>© {new Date().getFullYear()} E-Cell, IIT Bhilai. All rights reserved.</p>
+            <p className="mt-2">
+              Made by <span className="font-semibold text-ink">Akshat Kansal</span>, Tech
+              Head ’26, E-Cell.
+            </p>
             {/* CC BY 4.0 requires this credit — see public/models/README.md */}
             <p className="mt-2">
               Hero model{' '}
