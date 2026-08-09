@@ -41,7 +41,7 @@ function Grid() {
   return (
     <instancedMesh ref={mesh} args={[null, null, COUNT]}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#0a0a0a" roughness={0.45} metalness={0.05} />
+      <meshStandardMaterial color="#0a0a0b" roughness={0.45} metalness={0.05} />
     </instancedMesh>
   )
 }

@@ -4,32 +4,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#ffffff',
-        bone: '#f2f2ef',
-        stone: '#e6e6e1',
-        ink: '#0a0a0a',
-        'ink-70': '#5c5c5c',
-        'ink-40': '#9a9a9a',
+        paper: '#FAFAF7',
+        bone: '#EFEEE7',
+        stone: '#D8D6CB',
+        ink: '#0A0A0B',
+        'ink-70': '#4A4A4C',
+        'ink-40': '#6B6B6E',
 
-        /* Card tones — vivid blocks on a white page */
-        lime: '#d4ff3f',
-        grass: '#0f5132',
-        blush: '#ff9db0',
-        butter: '#ffe066',
-        violet: '#c4b5ff',
-        sky: '#9ad7f5',
+        /* Card tones — vivid blocks on a bone page */
+        lime: '#D8FF3E',
+        grass: '#0F5132',
+        blush: '#FF9DB0',
+        butter: '#FFE066',
+        violet: '#C4B5FF',
+        sky: '#9AD7F5',
 
-        accent: '#d4ff3f',
+        accent: '#EC4899',
+        red: '#E60029',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        display: ['Righteous', 'Impact', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.045em',
       },
+      /* Brutalism: corners are square. Existing rounded-4xl/5xl usage flattens here. */
       borderRadius: {
-        '4xl': '2rem',
-        '5xl': '2.75rem',
+        '4xl': '0px',
+        '5xl': '0px',
+      },
+      boxShadow: {
+        hard: '8px 8px 0 0 #0A0A0B',
+        'hard-sm': '4px 4px 0 0 #0A0A0B',
+        'hard-accent': '8px 8px 0 0 #EC4899',
+        'hard-light': '8px 8px 0 0 #FAFAF7',
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.22, 1, 0.36, 1)',

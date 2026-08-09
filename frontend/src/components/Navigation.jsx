@@ -41,14 +41,14 @@ export default function Navigation() {
           hidden ? '-translate-y-[150%]' : 'translate-y-0'
         }`}
       >
-        <nav className="flex items-center gap-2 rounded-full bg-ink/95 backdrop-blur-xl p-2 pl-5 shadow-[0_8px_40px_rgba(0,0,0,0.25)] ring-1 ring-white/10">
+        <nav className="flex items-center gap-2 border-2 border-ink bg-paper p-2 pl-5 shadow-hard-sm">
           {/* Mark */}
           <Link to="/" className="group flex items-center gap-2 shrink-0">
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-accent text-ink text-sm font-black">
+            <span className="grid h-8 w-8 place-items-center border-2 border-ink bg-accent text-ink text-sm font-black">
               E
             </span>
-            <span className="text-white font-bold tracking-tight leading-none">
-              e<span className="text-accent">/</span>cell
+            <span className="display text-ink text-lg leading-none">
+              E<span className="text-ink-40">/</span>CELL
             </span>
           </Link>
 
@@ -60,10 +60,10 @@ export default function Navigation() {
                 <Link
                   key={l.path}
                   to={l.path}
-                  className={`rounded-full px-4 py-2 text-sm transition-colors duration-300 ${
+                  className={`border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
                     active
-                      ? 'text-ink bg-white'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      ? 'border-ink bg-accent text-ink'
+                      : 'border-transparent text-ink hover:border-ink hover:bg-lime'
                   }`}
                 >
                   {l.label}
@@ -74,7 +74,7 @@ export default function Navigation() {
 
           <Link
             to="/contact"
-            className="ml-auto md:ml-1 hidden sm:inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink hover:bg-accent transition-colors duration-300"
+            className="ml-auto md:ml-1 hidden sm:inline-flex items-center border-2 border-ink bg-ink px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-paper transition-colors duration-200 hover:bg-accent hover:text-ink"
           >
             Join Us
           </Link>
@@ -84,7 +84,7 @@ export default function Navigation() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
             aria-expanded={open}
-            className="ml-auto sm:ml-1 md:hidden grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white"
+            className="ml-auto sm:ml-1 md:hidden grid h-10 w-10 place-items-center border-2 border-ink bg-lime text-ink"
           >
             <span className="relative block h-3 w-4">
               <span
@@ -123,7 +123,7 @@ export default function Navigation() {
           ))}
           <Link
             to="/contact"
-            className="mt-10 inline-flex justify-center rounded-full bg-accent px-8 py-4 font-bold text-ink"
+            className="mt-10 inline-flex justify-center border-2 border-paper bg-accent px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             Join E-Cell
           </Link>

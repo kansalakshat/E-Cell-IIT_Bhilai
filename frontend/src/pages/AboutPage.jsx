@@ -1,7 +1,10 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, lazy } from 'react'
 import gsap from 'gsap'
 import PageHeader from '../components/PageHeader'
+import LazyScene from '../components/LazyScene'
 import { useInView } from '../hooks/useInView'
+
+const Helix = lazy(() => import('../components/Helix'))
 
 const values = [
   ['Innovation', 'Noticing what everyone else walked past.'],
@@ -57,7 +60,7 @@ function Reveal({ children, className = '' }) {
 
 export default function AboutPage() {
   return (
-    <div className="bg-paper">
+    <div>
       <PageHeader
         eyebrow="About"
         title="About us"
@@ -68,7 +71,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-4xl bg-bone p-10 sm:p-12">
+            <div className="brutal h-full bg-lime p-10 sm:p-12">
               <p className="eyebrow mb-8">Vision</p>
               <p className="display text-[clamp(1.6rem,3vw,2.4rem)]">
                 A campus where students are expected to innovate, create, lead and solve
@@ -78,8 +81,8 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal>
-            <div className="h-full rounded-4xl bg-ink p-10 text-white sm:p-12">
-              <p className="eyebrow mb-8 text-white/40">Mission</p>
+            <div className="brutal h-full bg-ink p-10 text-white sm:p-12">
+              <p className="eyebrow mb-8 text-white/70">Mission</p>
               <ul className="space-y-5">
                 {[
                   'Promote entrepreneurial thinking across every discipline.',
@@ -90,7 +93,7 @@ export default function AboutPage() {
                   'Help students turn ideas into things that exist.',
                 ].map((m) => (
                   <li key={m} className="flex gap-4 text-white/75">
-                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    <span className="mt-2 h-2 w-2 shrink-0 bg-accent" />
                     <span>{m}</span>
                   </li>
                 ))}
@@ -100,23 +103,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section className="border-y border-stone bg-bone py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10">
+      {/* Values — helix drifts behind the list */}
+      <section className="relative overflow-hidden border-y-2 border-ink bg-bone py-24 sm:py-32">
+        <LazyScene
+          scene={Helix}
+          className="scene-bg pointer-events-none absolute inset-0"
+        />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
             <p className="eyebrow mb-5">What we hold to</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)]">Core values.</h2>
+            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">Core values.</h2>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
             {values.map(([title, body], i) => (
               <Reveal key={title}>
-                <div className="flex gap-6 border-t border-stone py-8">
+                <div className="flex gap-6 border-t-2 border-ink py-8">
                   <span className="pt-1 text-sm tabular-nums text-ink-40">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div>
-                    <h3 className="display text-2xl">{title}</h3>
+                    <h3 className="display text-2xl uppercase">{title}</h3>
                     <p className="mt-2 text-[15px] text-ink-70">{body}</p>
                   </div>
                 </div>
@@ -130,20 +137,20 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
         <Reveal className="mb-14">
           <p className="eyebrow mb-5">Programmes</p>
-          <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)]">What we do.</h2>
+          <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">What we do.</h2>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {doing.map(([title, body], i) => (
             <Reveal key={title}>
-              <div className="group h-full rounded-4xl border border-stone p-9 transition-colors duration-500 ease-smooth hover:border-ink hover:bg-ink">
-                <span className="text-sm tabular-nums text-ink-40 transition-colors duration-500 group-hover:text-accent">
+              <div className="brutal group h-full bg-paper p-9">
+                <span className="display text-2xl tabular-nums text-ink">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="display mt-6 text-2xl transition-colors duration-500 group-hover:text-white">
+                <h3 className="display mt-6 text-2xl uppercase">
                   {title}
                 </h3>
-                <p className="mt-4 text-[15px] leading-relaxed text-ink-70 transition-colors duration-500 group-hover:text-white/60">
+                <p className="mt-4 text-[15px] leading-relaxed text-ink-70">
                   {body}
                 </p>
               </div>
@@ -156,16 +163,16 @@ export default function AboutPage() {
       <section className="bg-ink py-24 text-white sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
-            <p className="eyebrow mb-5 text-white/40">Membership</p>
-            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)]">
+            <p className="eyebrow mb-5 text-white/70">Membership</p>
+            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               Who can join? Everyone.
             </h2>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Reveal>
-              <div className="rounded-4xl border border-white/10 p-10">
-                <p className="eyebrow mb-8 text-white/40">You do not need</p>
+              <div className="brutal-light bg-ink p-10">
+                <p className="eyebrow mb-8 text-white/70">You do not need</p>
                 <ul className="space-y-4">
                   {[
                     'A startup idea',
@@ -184,7 +191,7 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal>
-              <div className="rounded-4xl bg-accent p-10 text-ink">
+              <div className="brutal-light bg-accent p-10 text-ink">
                 <p className="eyebrow mb-8 text-ink/50">We look for</p>
                 <ul className="space-y-4">
                   {[
@@ -195,7 +202,7 @@ export default function AboutPage() {
                     'Ownership and teamwork',
                   ].map((x) => (
                     <li key={x} className="flex items-center gap-4 font-medium">
-                      <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+                      <span className="h-2 w-2 bg-ink" />
                       {x}
                     </li>
                   ))}
@@ -210,7 +217,7 @@ export default function AboutPage() {
             </p>
             <a
               href="/contact"
-              className="mt-10 inline-flex rounded-full bg-white px-9 py-4 font-semibold text-ink transition-colors hover:bg-accent"
+              className="brutal-light mt-10 inline-flex bg-lime px-9 py-4 font-bold uppercase tracking-wide text-ink"
             >
               Join E-Cell
             </a>

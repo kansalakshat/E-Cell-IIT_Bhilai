@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState, lazy, Suspense } from 'react'
+import { useRef, useEffect, lazy } from 'react'
 import gsap from 'gsap'
 import Hero3D from '../components/Hero3D'
+import LazyScene from '../components/LazyScene'
 
 /* Second three.js scene — only fetched once it scrolls into view */
 const WaveField = lazy(() => import('../components/WaveField'))
@@ -214,47 +215,29 @@ function Reveal({ children, className = '' }) {
   )
 }
 
-/* Mounts the wave scene only once its slot is on screen */
-function LazyWave() {
-  const ref = useRef()
-  const inView = useInView(ref, { threshold: 0.1 })
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    if (inView) setMounted(true)
-  }, [inView])
-
-  return (
-    <div ref={ref} className="h-[360px] sm:h-[460px] lg:h-[560px]">
-      {mounted && (
-        <Suspense fallback={null}>
-          <WaveField />
-        </Suspense>
-      )}
-    </div>
-  )
-}
-
 export default function HomePage() {
   return (
-    <div className="bg-paper">
+    <div>
       <Hero3D />
 
       {/* Marquee strip */}
-      <div className="overflow-hidden border-y border-stone bg-ink py-5">
+      <div className="overflow-hidden border-y-2 border-ink bg-red py-5">
         <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
           {Array.from({ length: 4 }).map((_, i) => (
-            <span key={i} className="flex items-center gap-12 text-sm uppercase tracking-[0.3em] text-white/70">
+            <span
+              key={i}
+              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-white"
+            >
               <span>Speaker Sessions</span>
-              <span className="text-accent">/</span>
+              <span className="text-ink">/</span>
               <span>E-Conclave</span>
-              <span className="text-accent">/</span>
+              <span className="text-ink">/</span>
               <span>Hackathons</span>
-              <span className="text-accent">/</span>
+              <span className="text-ink">/</span>
               <span>Case Competitions</span>
-              <span className="text-accent">/</span>
+              <span className="text-ink">/</span>
               <span>Mentorship</span>
-              <span className="text-accent">/</span>
+              <span className="text-ink">/</span>
             </span>
           ))}
         </div>
@@ -264,9 +247,10 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
         <Reveal>
           <p className="eyebrow mb-10">Who we are</p>
-          <h2 className="display max-w-4xl text-[clamp(2rem,5.2vw,4.2rem)]">
-            Entrepreneurship is not about starting companies. It is about noticing a
-            problem worth solving — and refusing to leave it alone.
+          <h2 className="display max-w-4xl text-[clamp(2rem,5.2vw,4.2rem)] uppercase">
+            Entrepreneurship is not about starting companies. It is about noticing a{' '}
+            <span className="bg-lime px-2">problem worth solving</span> — and refusing to
+            leave it alone.
           </h2>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-ink-70">
             E-Cell is the official entrepreneurship body of IIT Bhilai. We build the room
@@ -281,7 +265,7 @@ export default function HomePage() {
         <Reveal className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-5">What we do</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)]">Six ways in.</h2>
+            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">Six ways in.</h2>
           </div>
           <p className="max-w-sm text-ink-70">
             No startup idea required. No business background required. Curiosity and
@@ -301,28 +285,35 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:py-32">
           <Reveal>
             <p className="eyebrow mb-5">By the numbers</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)]">
+            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               Small cell.
               <br />
               Loud output.
             </h2>
 
-            <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10">
+            <div className="mt-14 grid grid-cols-2">
               {[
                 ['20+', 'active startups'],
                 ['₹40Cr+', 'raised by alumni'],
                 ['80%', 'ventures still running'],
                 ['1000+', 'students reached'],
-              ].map(([v, l]) => (
-                <div key={l} className="border-t border-stone pt-5">
+              ].map(([v, l], i) => (
+                <div
+                  key={l}
+                  className={`-ml-[2px] -mt-[2px] border-2 border-ink p-6 ${
+                    i % 3 === 0 ? 'bg-lime' : 'bg-paper'
+                  }`}
+                >
                   <div className="display text-4xl sm:text-5xl">{v}</div>
-                  <div className="mt-2 text-sm text-ink-40">{l}</div>
+                  <div className="mt-2 text-xs font-semibold uppercase tracking-widest text-ink-40">
+                    {l}
+                  </div>
                 </div>
               ))}
             </div>
           </Reveal>
 
-          <LazyWave />
+          <LazyScene scene={WaveField} className="h-[360px] sm:h-[460px] lg:h-[560px]" />
         </div>
       </section>
 
@@ -330,7 +321,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
         <Reveal className="mb-14">
           <p className="eyebrow mb-5">What runs through the year</p>
-          <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)]">
+          <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
             Things we actually run.
           </h2>
         </Reveal>
@@ -343,11 +334,11 @@ export default function HomePage() {
       </section>
 
       {/* Founder path */}
-      <section className="bg-paper">
+      <section>
         <div className="mx-auto max-w-7xl px-6 pb-28 sm:px-10 sm:pb-36">
           <Reveal className="mb-6">
             <p className="eyebrow mb-5">The path</p>
-            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)]">
+            <h2 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               Idea to company, in four moves.
             </h2>
           </Reveal>
@@ -364,8 +355,8 @@ export default function HomePage() {
       <section className="bg-ink py-28 text-white sm:py-36">
         <div className="mx-auto max-w-7xl px-6 sm:px-10">
           <Reveal className="mb-14">
-            <p className="eyebrow mb-5 text-white/40">From the room</p>
-            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)]">
+            <p className="eyebrow mb-5 text-white/70">From the room</p>
+            <h2 className="display text-[clamp(2.2rem,5.5vw,4.5rem)] uppercase">
               People who went through it.
             </h2>
           </Reveal>
@@ -374,15 +365,15 @@ export default function HomePage() {
             {voices.map((v) => (
               <figure
                 key={v.name}
-                className="flex flex-col justify-between rounded-4xl border border-white/10 p-9 transition-colors duration-500 hover:border-accent/50"
+                className="brutal-light flex flex-col justify-between bg-ink p-9"
               >
                 <blockquote className="text-lg leading-relaxed text-white/80">
                   “{v.quote}”
                 </blockquote>
-                <figcaption className="mt-10 border-t border-white/10 pt-6">
-                  <div className="font-semibold">{v.name}</div>
+                <figcaption className="mt-10 border-t-2 border-white/20 pt-6">
+                  <div className="display text-xl uppercase">{v.name}</div>
                   <div className="mt-1 text-sm text-accent">{v.role}</div>
-                  <div className="mt-1 text-xs text-white/40">{v.year}</div>
+                  <div className="mt-1 text-xs text-white/60">{v.year}</div>
                 </figcaption>
               </figure>
             ))}
@@ -393,8 +384,8 @@ export default function HomePage() {
       {/* Closing CTA */}
       <section className="mx-auto max-w-7xl px-6 py-32 sm:px-10 sm:py-44">
         <Reveal className="text-center">
-          <h2 className="display mx-auto max-w-4xl text-[clamp(2.6rem,8vw,7rem)]">
-            Bring the curiosity. We handle the rest.
+          <h2 className="display mx-auto max-w-4xl text-[clamp(2.6rem,8vw,7rem)] uppercase">
+            Bring the curiosity. <span className="bg-accent px-3 text-ink">We handle the rest.</span>
           </h2>
           <p className="mx-auto mt-10 max-w-xl text-lg text-ink-70">
             Open to every branch, every year. No idea, no experience and no business
@@ -402,10 +393,10 @@ export default function HomePage() {
           </p>
           <a
             href="/contact"
-            className="group mt-12 inline-flex items-center gap-4 rounded-full bg-ink px-10 py-5 text-lg font-semibold text-white transition-colors duration-300 hover:bg-accent hover:text-ink"
+            className="brutal group mt-12 inline-flex items-center gap-4 bg-accent px-10 py-5 text-lg font-bold uppercase tracking-wide text-ink"
           >
             Join E-Cell
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15 transition-colors duration-300 group-hover:bg-ink/10">
+            <span className="grid h-8 w-8 place-items-center border-2 border-ink">
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
               </svg>

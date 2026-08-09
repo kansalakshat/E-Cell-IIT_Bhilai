@@ -25,28 +25,24 @@ export default function EventCard({ event, index = 0 }) {
   return (
     <article
       ref={ref}
-      className="group flex translate-y-8 flex-col justify-between rounded-4xl border border-stone bg-paper p-8 opacity-0 transition-colors duration-500 ease-smooth hover:border-ink hover:bg-ink"
+      className="brutal group flex translate-y-8 flex-col justify-between bg-paper p-8 opacity-0"
     >
       <div>
         <div className="flex items-start justify-between gap-4">
-          <span className="rounded-full bg-bone px-3 py-1 text-xs font-semibold capitalize text-ink transition-colors duration-500 group-hover:bg-accent">
+          <span className="border-2 border-ink bg-lime px-3 py-1 text-xs font-bold uppercase tracking-wide text-ink transition-colors duration-200 group-hover:bg-accent group-hover:text-ink">
             {label}
           </span>
-          <time className="text-xs text-ink-40 transition-colors duration-500 group-hover:text-white/40">
+          <time className="text-xs font-semibold uppercase tracking-wide text-ink-40">
             {fmt(event.date)}
           </time>
         </div>
 
-        <h3 className="display mt-7 text-3xl transition-colors duration-500 group-hover:text-white">
-          {event.title}
-        </h3>
-        <p className="mt-4 text-[15px] leading-relaxed text-ink-70 transition-colors duration-500 group-hover:text-white/60">
-          {event.description}
-        </p>
+        <h3 className="display mt-7 text-3xl uppercase">{event.title}</h3>
+        <p className="mt-4 text-[15px] leading-relaxed text-ink-70">{event.description}</p>
       </div>
 
-      <div className="mt-10 flex items-center gap-3 text-sm font-semibold transition-colors duration-500 group-hover:text-white">
-        <span className="grid h-9 w-9 place-items-center rounded-full border border-ink transition-all duration-500 ease-smooth group-hover:border-accent group-hover:bg-accent">
+      <div className="mt-10 flex items-center gap-3 text-sm font-bold uppercase tracking-wide">
+        <span className="grid h-9 w-9 place-items-center border-2 border-ink transition-colors duration-200 group-hover:bg-accent group-hover:text-ink">
           <svg
             className="h-3.5 w-3.5 transition-transform duration-500 ease-smooth group-hover:rotate-45"
             viewBox="0 0 24 24"

@@ -3,7 +3,7 @@ import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
 
 const INK = '#0a0a0a'
-const ACCENT = '#d8ff3e'
+const ACCENT = '#e6002a'
 
 /* Slowly tumbling wireframe knot — the centrepiece */
 function Knot() {

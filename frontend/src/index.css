@@ -14,49 +14,123 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: #ffffff;
-  color: #0a0a0a;
+  font-family: 'Poppins', system-ui, sans-serif;
+  color: #0a0a0b;
   overflow-x: hidden;
-  letter-spacing: -0.011em;
+  /* Blueprint grid — the "visible grid" brutalism leans on */
+  background-color: #fafaf7;
+  background-image: linear-gradient(#0a0a0b0d 1px, transparent 1px),
+    linear-gradient(90deg, #0a0a0b0d 1px, transparent 1px);
+  background-size: 72px 72px;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #f2f2ef;
+  background: #efeee7;
+  border-left: 2px solid #0a0a0b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0a0a0a;
-  border-radius: 999px;
-  border: 3px solid #f2f2ef;
+  background: #0a0a0b;
+  border: 2px solid #efeee7;
 }
 
 ::selection {
-  background: #d8ff3e;
-  color: #0a0a0a;
+  background: #ec4899;
+  color: #0a0a0b;
 }
 
-/* Display type — tight, heavy, six2eight-ish */
-.display {
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 0.92;
+/* Keyboard focus stays loud and square. currentColor so the ring always
+   contrasts with whatever block it lands on, light or dark. */
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
 }
 
-/* Eyebrow label above sections */
-.eyebrow {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: #9a9a9a;
+/* Component classes sit in @layer components so per-instance Tailwind
+   utilities (text-white, border-accent, …) still win over them. */
+@layer components {
+  /* Display type — Righteous, condensed and shouty */
+  .display {
+    font-family: 'Righteous', Impact, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+
+  /* Eyebrow label above sections */
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: #0a0a0b;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.75rem;
+    height: 3px;
+    margin-right: 0.75rem;
+    vertical-align: 0.2em;
+    background: #ec4899;
+  }
+
+  /* Hard-edged panel: 2px rule + offset shadow, nudges into it on hover */
+  .brutal {
+    border: 2px solid #0a0a0b;
+    box-shadow: 8px 8px 0 0 #0a0a0b;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .brutal:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 0 #0a0a0b;
+  }
+
+  /* Same, on dark backgrounds */
+  .brutal-light {
+    border: 2px solid #fafaf7;
+    box-shadow: 8px 8px 0 0 #ec4899;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .brutal-light:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 0 #ec4899;
+  }
+
+  /* Background 3D layer: dissolves at the edges so the canvas has no seam
+     with the section it sits behind. */
+  .scene-bg {
+    opacity: 0.55;
+    -webkit-mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
+    mask-image: radial-gradient(130% 90% at 50% 50%, #000 45%, transparent 85%);
+  }
+
+  /* Outlined display type — used behind big numbers */
+  .stroke-type {
+    color: transparent;
+    -webkit-text-stroke: 2px #0a0a0b;
+  }
+
+  .rule {
+    height: 2px;
+    background: #0a0a0b;
+  }
 }
 
-/* Line that draws itself in on scroll */
-.rule {
-  height: 1px;
-  background: #e6e6e1;
+/* Headings swell slightly under the cursor. transform only — no reflow. */
+h1,
+h2,
+h3 {
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+h1:hover,
+h2:hover,
+h3:hover {
+  transform: scale(1.035);
 }
 
 /* Masked line reveal */
@@ -83,5 +157,9 @@ body {
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .brutal:hover,
+  .brutal-light:hover {
+    transform: none;
   }
 }

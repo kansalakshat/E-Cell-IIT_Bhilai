@@ -25,17 +25,17 @@ const socials = ['Instagram', 'LinkedIn', 'X', 'GitHub']
 
 export default function Footer() {
   return (
-    <footer className="border-t border-stone bg-paper">
+    <footer className="border-t-2 border-ink bg-bone">
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
           {/* Brand */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-ink text-sm font-black text-white">
+              <span className="grid h-9 w-9 place-items-center border-2 border-ink bg-accent text-sm font-black text-ink">
                 E
               </span>
-              <span className="display text-xl">
-                e<span className="text-ink-40">/</span>cell
+              <span className="display text-2xl">
+                E<span className="text-ink-40">/</span>CELL
               </span>
             </Link>
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-ink-70">
@@ -44,7 +44,7 @@ export default function Footer() {
             </p>
             <a
               href="mailto:contact@ecell.iitbhilai.ac.in"
-              className="mt-8 inline-block border-b border-ink pb-1 text-sm font-semibold transition-colors hover:border-ink-40 hover:text-ink-70"
+              className="brutal mt-8 inline-block bg-lime px-4 py-2 text-sm font-bold"
             >
               contact@ecell.iitbhilai.ac.in
             </a>
@@ -97,8 +97,8 @@ export default function Footer() {
         </div>
 
         {/* Oversized wordmark */}
-        <div className="mt-20 overflow-hidden border-t border-stone pt-10">
-          <div className="display select-none text-[clamp(3rem,15vw,12rem)] leading-none text-stone">
+        <div className="mt-20 overflow-hidden border-t-2 border-ink pt-10">
+          <div className="display stroke-type select-none text-[clamp(3rem,15vw,12rem)] leading-none">
             E-CELL
           </div>
         </div>

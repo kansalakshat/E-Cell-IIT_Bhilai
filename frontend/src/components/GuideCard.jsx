@@ -3,9 +3,9 @@ import gsap from 'gsap'
 import { useInView } from '../hooks/useInView'
 
 const TONE = {
-  Beginner: 'bg-accent text-ink',
-  Intermediate: 'bg-ink text-white',
-  Advanced: 'border border-ink text-ink',
+  Beginner: 'bg-lime text-ink border-2 border-ink',
+  Intermediate: 'bg-ink text-white border-2 border-ink',
+  Advanced: 'bg-red text-white border-2 border-ink',
 }
 
 export default function GuideCard({
@@ -34,20 +34,22 @@ export default function GuideCard({
   return (
     <article
       ref={ref}
-      className="group grid translate-y-8 grid-cols-1 gap-8 border-t border-stone py-12 opacity-0 md:grid-cols-12"
+      className="group grid translate-y-8 grid-cols-1 gap-8 border-t-2 border-ink py-12 opacity-0 md:grid-cols-12"
     >
       {/* Step number */}
       <div className="md:col-span-2">
-        <span className="display text-6xl text-stone transition-colors duration-500 group-hover:text-ink">
+        <span className="display stroke-type text-7xl transition-colors duration-300 group-hover:text-accent">
           {String(number).padStart(2, '0')}
         </span>
       </div>
 
       {/* Title + meta */}
       <div className="md:col-span-4">
-        <h3 className="display text-3xl sm:text-4xl">{title}</h3>
+        <h3 className="display text-3xl uppercase sm:text-4xl">{title}</h3>
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${TONE[difficulty]}`}>
+          <span
+            className={`px-3 py-1 text-xs font-bold uppercase tracking-wide ${TONE[difficulty]}`}
+          >
             {difficulty}
           </span>
           {duration && <span className="text-xs text-ink-40">{duration}</span>}
@@ -61,7 +63,9 @@ export default function GuideCard({
           <ul className="mt-6 space-y-3">
             {steps.map((s, i) => (
               <li key={i} className="flex gap-4 text-sm text-ink">
-                <span className="w-4 shrink-0 tabular-nums text-ink-40">{i + 1}</span>
+                <span className="grid h-5 w-5 shrink-0 place-items-center bg-ink text-[10px] font-bold tabular-nums text-paper">
+                  {i + 1}
+                </span>
                 <span>{s}</span>
               </li>
             ))}

@@ -16,10 +16,10 @@ export default function PageHeader({ eyebrow, title, lead }) {
   }, [])
 
   return (
-    <header ref={ref} className="border-b border-stone bg-paper">
+    <header ref={ref} className="border-b-2 border-ink bg-bone">
       <div className="mx-auto max-w-7xl px-6 pb-20 pt-40 sm:px-10 sm:pb-28 sm:pt-48">
         {eyebrow && <p className="ph-fade eyebrow mb-8">{eyebrow}</p>}
-        <h1 className="display text-[clamp(2.8rem,9vw,8rem)]">
+        <h1 className="display text-[clamp(2.8rem,9vw,8rem)] uppercase">
           <span className="ph-line line-mask">
             <span className="block">{title}</span>
           </span>

@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState, lazy } from 'react'
 import PageHeader from '../components/PageHeader'
+import LazyScene from '../components/LazyScene'
+
+const Shards = lazy(() => import('../components/Shards'))
 
 const channels = [
   { label: 'Email', value: 'contact@ecell.iitbhilai.ac.in', href: 'mailto:contact@ecell.iitbhilai.ac.in' },
@@ -33,15 +36,16 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-paper">
+    <div>
       <PageHeader
         eyebrow="Contact"
         title="Say hello"
         lead="Questions about joining, sponsoring an event, or speaking on campus? Write to us — we read everything."
       />
 
-      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+      <section className="relative overflow-hidden py-24 sm:py-32">
+        <LazyScene scene={Shards} className="scene-bg pointer-events-none absolute inset-0" />
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 sm:px-10 lg:grid-cols-12">
           {/* Channels */}
           <div className="lg:col-span-4">
             <p className="eyebrow mb-10">Reach us</p>
@@ -62,7 +66,7 @@ export default function ContactPage() {
 
           {/* Form */}
           <div className="lg:col-span-8">
-            <form onSubmit={onSubmit} className="rounded-4xl bg-bone p-8 sm:p-12">
+            <form onSubmit={onSubmit} className="brutal bg-paper p-8 sm:p-12">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <label className="block">
                   <span className="eyebrow">Name</span>
@@ -70,7 +74,7 @@ export default function ContactPage() {
                     name="name"
                     required
                     placeholder="Your name"
-                    className="mt-3 w-full border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                    className="mt-3 w-full border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                   />
                 </label>
                 <label className="block">
@@ -80,7 +84,7 @@ export default function ContactPage() {
                     type="email"
                     required
                     placeholder="you@example.com"
-                    className="mt-3 w-full border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                    className="mt-3 w-full border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                   />
                 </label>
               </div>
@@ -92,7 +96,7 @@ export default function ContactPage() {
                   required
                   rows={5}
                   placeholder="Tell us what you're thinking about…"
-                  className="mt-3 w-full resize-none border-b border-stone bg-transparent pb-3 text-lg outline-none transition-colors placeholder:text-ink-40 focus:border-ink"
+                  className="mt-3 w-full resize-none border-2 border-ink bg-bone px-4 py-3 text-lg outline-none placeholder:text-ink-40 focus:bg-lime"
                 />
               </label>
 
@@ -100,7 +104,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="rounded-full bg-ink px-9 py-4 font-semibold text-white transition-colors hover:bg-accent hover:text-ink disabled:opacity-50"
+                  className="brutal bg-accent px-9 py-4 font-bold uppercase tracking-wide text-ink disabled:opacity-50"
                 >
                   {status === 'sending' ? 'Sending…' : 'Send message'}
                 </button>

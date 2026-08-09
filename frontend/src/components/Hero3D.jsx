@@ -27,7 +27,7 @@ export default function Hero3D() {
   }, [])
 
   return (
-    <section ref={root} className="relative min-h-[100svh] w-full overflow-hidden bg-paper">
+    <section ref={root} className="relative min-h-[100svh] w-full overflow-hidden">
       <div className="absolute inset-0">
         {showScene && (
           <Suspense fallback={null}>
@@ -42,15 +42,15 @@ export default function Hero3D() {
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pt-32 pb-24 sm:px-10">
         <p className="hero-fade eyebrow mb-8">Entrepreneurship Cell — IIT Bhilai</p>
 
-        <h1 className="display text-[clamp(3.2rem,10.5vw,10rem)]">
+        <h1 className="display text-[clamp(3.2rem,10.5vw,10rem)] uppercase">
           <span className="hero-line line-mask">
             <span className="block">Build.</span>
           </span>
           <span className="hero-line line-mask">
-            <span className="block text-ink-40">Innovate.</span>
+            <span className="block stroke-type">Innovate.</span>
           </span>
           <span className="hero-line line-mask">
-            <span className="block">Lead.</span>
+            <span className="inline-block bg-accent px-5 text-ink">Lead.</span>
           </span>
         </h1>
 
@@ -62,7 +62,7 @@ export default function Hero3D() {
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row">
           <a
             href="/contact"
-            className="group inline-flex items-center justify-center gap-3 rounded-full bg-ink px-8 py-4 font-semibold text-white transition-colors duration-300 hover:bg-accent hover:text-ink"
+            className="brutal group inline-flex items-center justify-center gap-3 bg-accent px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             Join E-Cell
             <svg
@@ -77,21 +77,23 @@ export default function Hero3D() {
           </a>
           <a
             href="/events"
-            className="inline-flex items-center justify-center rounded-full border border-stone px-8 py-4 font-semibold text-ink transition-colors duration-300 hover:border-ink"
+            className="brutal inline-flex items-center justify-center bg-paper px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             See our events
           </a>
         </div>
 
-        <div className="hero-fade mt-20 flex flex-wrap gap-x-12 gap-y-5">
+        <div className="hero-fade mt-20 flex flex-wrap">
           {[
             ['500+', 'members'],
             ['50+', 'events a year'],
             ['20+', 'startups'],
           ].map(([v, l]) => (
-            <div key={l}>
+            <div key={l} className="border-2 border-ink bg-paper px-7 py-4 -ml-[2px] first:ml-0">
               <div className="display text-3xl">{v}</div>
-              <div className="mt-1 text-sm text-ink-40">{l}</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-widest text-ink-40">
+                {l}
+              </div>
             </div>
           ))}
         </div>
