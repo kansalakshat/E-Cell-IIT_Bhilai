@@ -323,11 +323,28 @@ body {
       0 20px 50px -24px rgb(0 0 0 / 0.85);
   }
 
-  /* Without backdrop-filter support the panel would be 60% transparent over
-     live content — unreadable. Fall back to near-opaque. */
+  /* Frost the cards too. Their background comes from bg-lime / bg-red /
+     bg-ink utilities, which would paint opaque over the blur — but Tailwind
+     expresses alpha as --tw-bg-opacity, and this selector outranks a bare
+     utility class, so turning that one variable down makes every toned card
+     translucent without touching a single tone definition. */
+  :root[data-theme='dark'] .brutal,
+  :root[data-theme='dark'] .brutal-light {
+    --tw-bg-opacity: 0.6;
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(16px) saturate(150%);
+    border-color: rgb(255 255 255 / 0.12);
+  }
+
+  /* Without backdrop-filter support these would be 60% transparent over live
+     content — unreadable. Fall back to near-opaque. */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     :root[data-theme='dark'] .glass {
       background-color: rgb(var(--c-paper) / 0.94);
+    }
+    :root[data-theme='dark'] .brutal,
+    :root[data-theme='dark'] .brutal-light {
+      --tw-bg-opacity: 0.95;
     }
   }
 
