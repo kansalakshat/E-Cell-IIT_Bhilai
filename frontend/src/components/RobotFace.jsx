@@ -14,7 +14,10 @@ const SPIN = 0.12
 /* Light-mode palette: whatever was pale becomes this black, whatever was
    dark becomes this off-white. */
 const SHELL_DARK = new THREE.Color('#000000')
-const SHELL_LIGHT = new THREE.Color('#FFFFFF')
+/* Sits a few steps below the page's #FAFAF7 so the body still reads as
+   white but keeps a visible edge against the background. Pure white would
+   dissolve into it. */
+const SHELL_LIGHT = new THREE.Color('#E4E4DF')
 
 export default function RobotFace() {
   const ref = useRef()
