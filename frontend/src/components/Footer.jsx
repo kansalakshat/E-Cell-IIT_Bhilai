@@ -104,7 +104,31 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 text-xs text-ink-40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} E-Cell, IIT Bhilai. All rights reserved.</p>
+          <div>
+            <p>© {new Date().getFullYear()} E-Cell, IIT Bhilai. All rights reserved.</p>
+            {/* CC BY 4.0 requires this credit — see public/models/README.md */}
+            <p className="mt-2">
+              Hero model{' '}
+              <a
+                href="https://sketchfab.com/3d-models/humanoid-robot-face-1532b74a76dc43d18a4fc2c5ba1f2229"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline transition-colors hover:text-ink"
+              >
+                “Humanoid Robot Face”
+              </a>{' '}
+              by kito1704, licensed{' '}
+              <a
+                href="https://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline transition-colors hover:text-ink"
+              >
+                CC BY 4.0
+              </a>
+              .
+            </p>
+          </div>
           <div className="flex gap-6">
             <a href="#" className="transition-colors hover:text-ink">
               Privacy

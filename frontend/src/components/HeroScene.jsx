@@ -1,12 +1,14 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, lazy, Suspense } from 'react'
 import * as THREE from 'three'
 import { useSceneColors } from '../theme'
+import ModelBoundary from './ModelBoundary'
 
+/* Kept out of the main chunk — the .glb is far heavier than the geometry it
+   replaces, and the fallback has to render without it. */
+const RobotFace = lazy(() => import('./RobotFace'))
 
-
-
-/* Slowly tumbling wireframe knot — the centrepiece */
+/* Slowly tumbling wireframe knot — the fallback centrepiece */
 function Knot() {
   const ref = useRef()
   useFrame((_, d) => {
@@ -128,8 +130,28 @@ export default function HeroScene() {
       <directionalLight position={[5, 8, 6]} intensity={2.2} />
       <directionalLight position={[-6, -3, 2]} intensity={0.7} />
       <Rig>
-        <Knot />
-        <Core />
+        {/* Robot face replaces the knot + core. Both fall back together:
+            the core was framed to sit inside the knot, so showing it around
+            the face would just clip through it. */}
+        <ModelBoundary
+          fallback={
+            <>
+              <Knot />
+              <Core />
+            </>
+          }
+        >
+          <Suspense
+            fallback={
+              <>
+                <Knot />
+                <Core />
+              </>
+            }
+          >
+            <RobotFace />
+          </Suspense>
+        </ModelBoundary>
         <Swarm />
         <Rings />
       </Rig>
