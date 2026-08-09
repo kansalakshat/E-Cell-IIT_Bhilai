@@ -1,26 +1,46 @@
-import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useMemo } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 
 export const MODEL_URL = '/models/robot-face.glb'
 
-/* Framing knobs — the model arrives at the artist's own scale and pivot,
-   so these are the three values worth touching. */
-const SCALE = 4.6
-const POSITION = [0, -0.4, 0]
+/* Share of the viewport the model fills. 1 touches the limiting edge; go
+   above 1 to let it bleed off screen. */
+const FILL = 1
 const SPIN = 0.12
 
 export default function RobotFace() {
   const ref = useRef()
-  /* Materials are left exactly as authored — no traversal, no overrides —
-     so it renders the way it does on Sketchfab. */
+  /* Materials left exactly as authored, so it shades the way it does on Sketchfab */
   const { scene } = useGLTF(MODEL_URL)
+
+  /* Measured rather than guessed: the export's scale and pivot are the
+     artist's, so read the bounding box and derive both from it. */
+  const { size, center } = useMemo(() => {
+    const box = new THREE.Box3().setFromObject(scene)
+    return {
+      size: box.getSize(new THREE.Vector3()),
+      center: box.getCenter(new THREE.Vector3()),
+    }
+  }, [scene])
+
+  /* viewport is in world units at the origin, and updates on resize — so
+     this refits itself instead of cropping on a different screen. */
+  const viewport = useThree((s) => s.viewport)
+  const scale = Math.min(viewport.width / size.x, viewport.height / size.y) * FILL
 
   useFrame((_, d) => {
     ref.current.rotation.y += d * SPIN
   })
 
-  return <primitive ref={ref} object={scene} scale={SCALE} position={POSITION} />
+  return (
+    <group ref={ref}>
+      {/* Offsetting by the measured centre puts the model's middle on the
+          origin, so the group spins in place rather than orbiting. */}
+      <primitive object={scene} scale={scale} position={center.clone().multiplyScalar(-scale)} />
+    </group>
+  )
 }
 
 useGLTF.preload(MODEL_URL)
