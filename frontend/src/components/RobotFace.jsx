@@ -1,30 +1,20 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
 export const MODEL_URL = '/models/robot-face.glb'
 
-/* Sketchfab models arrive at whatever scale and pivot the artist used, and
-   this one can't be measured until the file is in place — so the framing
-   knobs live here rather than being scattered through the JSX. */
-const SCALE = 2.6
+/* Framing knobs — the model arrives at the artist's own scale and pivot,
+   so these are the three values worth touching. */
+const SCALE = 4.6
 const POSITION = [0, -0.4, 0]
 const SPIN = 0.12
 
 export default function RobotFace() {
   const ref = useRef()
+  /* Materials are left exactly as authored — no traversal, no overrides —
+     so it renders the way it does on Sketchfab. */
   const { scene } = useGLTF(MODEL_URL)
-
-  /* Sketchfab exports often ship with shadows off and materials flagged
-     transparent; both read badly against the hero wash. */
-  useEffect(() => {
-    scene.traverse((o) => {
-      if (!o.isMesh) return
-      o.castShadow = false
-      o.receiveShadow = false
-      if (o.material) o.material.transparent = false
-    })
-  }, [scene])
 
   useFrame((_, d) => {
     ref.current.rotation.y += d * SPIN
