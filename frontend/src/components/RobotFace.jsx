@@ -7,7 +7,7 @@ export const MODEL_URL = '/models/robot-face.glb'
 
 /* Share of the viewport the model fills. 1 touches the limiting edge; go
    above 1 to let it bleed off screen. */
-const FILL = 1
+const FILL = 0.85
 const SPIN = 0.12
 
 export default function RobotFace() {
