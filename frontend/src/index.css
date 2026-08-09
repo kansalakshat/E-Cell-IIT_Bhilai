@@ -296,6 +296,25 @@ body {
     .rail > * {
       flex: none;
     }
+
+    /* Opt out of the grid: stays a scrolling rail at every width. Pair with
+       `rail` and leave the md:grid-cols-* utilities off the element. */
+    .rail-lock {
+      overflow-x: auto;
+      padding-bottom: 1.25rem;
+      /* Snap points fight programmatic scrollLeft — the browser keeps
+         re-snapping against useScrollRail. Touch keeps its snap below md. */
+      scroll-snap-type: none;
+    }
+    .rail-lock > * {
+      flex: 0 0 46%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .rail-lock > * {
+      flex: 0 0 31.5%;
+    }
   }
 
   .scene-bg {

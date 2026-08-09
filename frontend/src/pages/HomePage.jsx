@@ -9,6 +9,7 @@ import FeatureCard from '../components/FeatureCard'
 import GuideCard from '../components/GuideCard'
 import EntrepreneurshipCard from '../components/EntrepreneurshipCard'
 import { useInView } from '../hooks/useInView'
+import { useScrollRail } from '../hooks/useScrollRail'
 
 const offerings = [
   {
@@ -216,6 +217,8 @@ function Reveal({ children, className = '' }) {
 }
 
 export default function HomePage() {
+  const offeringsRail = useScrollRail()
+
   return (
     <div>
       <Hero3D />
@@ -273,7 +276,7 @@ export default function HomePage() {
           </p>
         </Reveal>
 
-        <div tabIndex={0} className="rail md:grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={offeringsRail} tabIndex={0} className="rail rail-lock gap-5">
           {offerings.map((o, i) => (
             <FeatureCard key={o.title} {...o} index={i} />
           ))}
