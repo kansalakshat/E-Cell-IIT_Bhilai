@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
+/* Every hook here is a pointer-driven flourish, so every one of them wants
+   the same two answers: is there a real pointer, and has this person asked
+   for less motion? Asking once here means a new hook cannot forget, and the
+   reduced-motion opt-out cannot be honoured in three places and missed in a
+   fourth. CSS alone would not cover it — these animate through GSAP, which
+   the reduced-motion block in index.css never touches. */
+const skipPointerMotion = () =>
+  window.matchMedia('(hover: none)').matches ||
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 /* Button that leans toward the cursor when you get close */
 export function useMagnetic(strength = 0.35) {
   const ref = useRef(null)
@@ -8,7 +18,7 @@ export function useMagnetic(strength = 0.35) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (window.matchMedia('(hover: none)').matches) return
+    if (skipPointerMotion()) return
 
     const quickX = gsap.quickTo(el, 'x', { duration: 0.45, ease: 'power3.out' })
     const quickY = gsap.quickTo(el, 'y', { duration: 0.45, ease: 'power3.out' })
@@ -44,7 +54,7 @@ export function useCursorBadge() {
     const box = containerRef.current
     const badge = badgeRef.current
     if (!box || !badge) return
-    if (window.matchMedia('(hover: none)').matches) return
+    if (skipPointerMotion()) return
 
     const quickX = gsap.quickTo(badge, 'x', { duration: 0.5, ease: 'power3.out' })
     const quickY = gsap.quickTo(badge, 'y', { duration: 0.5, ease: 'power3.out' })
@@ -80,7 +90,7 @@ export function useTilt(max = 6) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (window.matchMedia('(hover: none)').matches) return
+    if (skipPointerMotion()) return
 
     const quickRX = gsap.quickTo(el, 'rotationX', { duration: 0.6, ease: 'power3.out' })
     const quickRY = gsap.quickTo(el, 'rotationY', { duration: 0.6, ease: 'power3.out' })

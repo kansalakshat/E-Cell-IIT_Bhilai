@@ -1,9 +1,8 @@
-import { useRef, useEffect, lazy } from 'react'
-import gsap from 'gsap'
+import { lazy } from 'react'
 import PageHeader from '../components/PageHeader'
 import LazyScene from '../components/LazyScene'
 import PinnedRail from '../components/PinnedRail'
-import { useInView } from '../hooks/useInView'
+import Reveal from '../components/Reveal'
 import { toneFor } from '../tones'
 
 const Helix = lazy(() => import('../components/Helix'))
@@ -45,20 +44,6 @@ const doing = [
     'Cross-campus events and knowledge exchange with peer institutes including IIT Dhanbad and NIT Agartala.',
   ],
 ]
-
-function Reveal({ children, className = '' }) {
-  const ref = useRef()
-  const inView = useInView(ref, { threshold: 0.15 })
-  useEffect(() => {
-    if (!inView) return
-    gsap.to(ref.current, { y: 0, opacity: 1, duration: 0.95, ease: 'power3.out' })
-  }, [inView])
-  return (
-    <div ref={ref} className={`translate-y-8 opacity-0 ${className}`}>
-      {children}
-    </div>
-  )
-}
 
 export default function AboutPage() {
   return (

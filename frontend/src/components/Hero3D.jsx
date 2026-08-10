@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState, lazy, Suspense } from 'react'
 import gsap from 'gsap'
+import Counter from './Counter'
+import { useMagnetic } from '../hooks/useInteractions'
 
 /* three.js is heavy — load it after the text has painted */
 const HeroScene = lazy(() => import('./HeroScene'))
@@ -7,6 +9,10 @@ const HeroScene = lazy(() => import('./HeroScene'))
 export default function Hero3D() {
   const root = useRef()
   const [showScene, setShowScene] = useState(false)
+  /* The primary pulls harder than the secondary, so the pair has a clear
+     lead even before you read either label. */
+  const joinRef = useMagnetic(0.3)
+  const eventsRef = useMagnetic(0.18)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -63,6 +69,7 @@ export default function Hero3D() {
 
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row">
           <a
+            ref={joinRef}
             href="/contact"
             className="brutal ghost group inline-flex items-center justify-center gap-3 !bg-accent/20 px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
@@ -78,6 +85,7 @@ export default function Hero3D() {
             </svg>
           </a>
           <a
+            ref={eventsRef}
             href="/events"
             className="brutal ghost-plain inline-flex items-center justify-center !bg-ink/5 px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
@@ -92,7 +100,9 @@ export default function Hero3D() {
             ['20+', 'startups'],
           ].map(([v, l]) => (
             <div key={l} className="border border-stone bg-paper px-7 py-4 -ml-[2px] first:ml-0">
-              <div className="display text-3xl">{v}</div>
+              <div className="display text-3xl">
+                <Counter value={v} />
+              </div>
               <div className="mt-1 text-xs font-semibold uppercase tracking-widest text-ink-40">
                 {l}
               </div>

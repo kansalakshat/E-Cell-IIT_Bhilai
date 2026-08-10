@@ -1,5 +1,4 @@
-import { useRef, useEffect, lazy } from 'react'
-import gsap from 'gsap'
+import { lazy } from 'react'
 import Hero3D from '../components/Hero3D'
 import LazyScene from '../components/LazyScene'
 
@@ -8,8 +7,11 @@ const WaveField = lazy(() => import('../components/WaveField'))
 import FeatureCard from '../components/FeatureCard'
 import GuideCard from '../components/GuideCard'
 import EntrepreneurshipCard from '../components/EntrepreneurshipCard'
-import { useInView } from '../hooks/useInView'
 import PinnedRail from '../components/PinnedRail'
+import Reveal from '../components/Reveal'
+import Counter from '../components/Counter'
+import Marquee from '../components/Marquee'
+import { useMagnetic } from '../hooks/useInteractions'
 
 const offerings = [
   {
@@ -199,52 +201,23 @@ const voices = [
   },
 ]
 
-/* Reveal helper for section headings */
-function Reveal({ children, className = '' }) {
-  const ref = useRef()
-  const inView = useInView(ref, { threshold: 0.2 })
-
-  useEffect(() => {
-    if (!inView) return
-    gsap.to(ref.current, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
-  }, [inView])
-
-  return (
-    <div ref={ref} className={`translate-y-8 opacity-0 ${className}`}>
-      {children}
-    </div>
-  )
-}
+const marqueeItems = [
+  'Speaker Sessions',
+  'E-Conclave',
+  'Hackathons',
+  'Case Competitions',
+  'Mentorship',
+]
 
 export default function HomePage() {
-
+  const ctaRef = useMagnetic(0.28)
 
   return (
     <div>
       <Hero3D />
 
-      {/* Marquee strip */}
-      <div className="overflow-hidden border-y border-stone bg-red py-5">
-        <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <span
-              key={i}
-              className="display flex items-center gap-12 text-xl uppercase tracking-wide text-white"
-            >
-              <span>Speaker Sessions</span>
-              <span className="text-white/45">/</span>
-              <span>E-Conclave</span>
-              <span className="text-white/45">/</span>
-              <span>Hackathons</span>
-              <span className="text-white/45">/</span>
-              <span>Case Competitions</span>
-              <span className="text-white/45">/</span>
-              <span>Mentorship</span>
-              <span className="text-white/45">/</span>
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Marquee strip — speed and direction follow the scroll */}
+      <Marquee items={marqueeItems} />
 
       {/* Manifesto */}
       <section className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
@@ -311,7 +284,9 @@ export default function HomePage() {
                     i % 3 === 0 ? 'bg-lime' : 'bg-paper'
                   }`}
                 >
-                  <div className="display text-4xl sm:text-5xl">{v}</div>
+                  <div className="display text-4xl sm:text-5xl">
+                    <Counter value={v} />
+                  </div>
                   <div className="mt-2 text-xs font-semibold uppercase tracking-widest text-ink-40">
                     {l}
                   </div>
@@ -396,7 +371,12 @@ export default function HomePage() {
             Open to every branch, every year. No idea, no experience and no business
             background required.
           </p>
+          {/* Magnetic. The inline transform GSAP writes here outranks the
+              `.brutal:hover` lift, so this button leans toward the cursor
+              instead of rising — a stronger tell on the one button that
+              matters most. */}
           <a
+            ref={ctaRef}
             href="/contact"
             className="brutal group mt-12 inline-flex items-center gap-4 bg-accent px-10 py-5 text-lg font-bold uppercase tracking-wide text-white"
           >

@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { useInView } from '../hooks/useInView'
 import { useTilt } from '../hooks/useInteractions'
+import Counter from './Counter'
 import { toneFor } from '../tones'
 
 export default function FeatureCard({
@@ -55,7 +56,9 @@ export default function FeatureCard({
           <div className={`mt-auto grid grid-cols-2 gap-6 border-t-2 pt-7 ${t.rule}`}>
             {metrics.map((m) => (
               <div key={m.label}>
-                <div className={`display text-2xl ${t.stat}`}>{m.value}</div>
+                <div className={`display text-2xl ${t.stat}`}>
+                  <Counter value={m.value} />
+                </div>
                 <div className={`mt-1 text-xs ${t.muted}`}>{m.label}</div>
               </div>
             ))}
