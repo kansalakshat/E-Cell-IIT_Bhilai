@@ -64,7 +64,7 @@ export default function Hero3D() {
         <div className="hero-fade mt-10 flex flex-col gap-3 sm:flex-row">
           <a
             href="/contact"
-            className="brutal group inline-flex items-center justify-center gap-3 bg-accent px-8 py-4 font-bold uppercase tracking-wide text-ink"
+            className="brutal group inline-flex items-center justify-center gap-3 !bg-accent/20 px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             Join E-Cell
             <svg
@@ -79,7 +79,7 @@ export default function Hero3D() {
           </a>
           <a
             href="/events"
-            className="brutal inline-flex items-center justify-center bg-paper px-8 py-4 font-bold uppercase tracking-wide text-ink"
+            className="brutal inline-flex items-center justify-center !bg-ink/5 px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             See our events
           </a>
