@@ -402,11 +402,28 @@ body {
     box-shadow: none;
   }
 
+  /* Same treatment without the accent — for the secondary action, which
+     shouldn't compete with the primary for attention. */
+  :root[data-theme='dark'] .ghost-plain {
+    background-color: rgb(255 255 255 / 0.05) !important;
+    background-image: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: rgb(255 255 255 / 0.28);
+    box-shadow: none;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     :root[data-theme='dark'] .ghost:hover {
       background-color: rgb(var(--c-accent) / 0.3) !important;
       background-image: none;
       border-color: rgb(var(--c-accent) / 0.9);
+      box-shadow: none;
+    }
+
+    :root[data-theme='dark'] .ghost-plain:hover {
+      background-color: rgb(255 255 255 / 0.11) !important;
+      border-color: rgb(255 255 255 / 0.55);
       box-shadow: none;
     }
   }

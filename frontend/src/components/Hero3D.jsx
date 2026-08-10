@@ -79,7 +79,7 @@ export default function Hero3D() {
           </a>
           <a
             href="/events"
-            className="brutal ghost inline-flex items-center justify-center !bg-ink/5 px-8 py-4 font-bold uppercase tracking-wide text-ink"
+            className="brutal ghost-plain inline-flex items-center justify-center !bg-ink/5 px-8 py-4 font-bold uppercase tracking-wide text-ink"
           >
             See our events
           </a>
