@@ -390,17 +390,24 @@ body {
      as a filled slab rather than something you can see through. Keeps the
      blur and a thin rim so it's still glass, just clear. */
   :root[data-theme='dark'] .ghost {
+    /* Transparent with an accent cast: the model shows through, but the
+       control still reads as a control. No sheen and no blur — a white film
+       over red just turns it pink. The !important outranks the utility
+       alpha sitting on the element itself. */
+    background-color: rgb(var(--c-accent) / 0.16) !important;
     background-image: none;
-    box-shadow: inset 0 1px 0 0 rgb(226 244 255 / 0.22),
-      inset 0 -1px 0 0 rgb(255 226 232 / 0.1), 0 18px 40px -26px rgb(0 0 0 / 0.9);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: rgb(var(--c-accent) / 0.55);
+    box-shadow: none;
   }
 
   @media (hover: hover) and (pointer: fine) {
     :root[data-theme='dark'] .ghost:hover {
+      background-color: rgb(var(--c-accent) / 0.3) !important;
       background-image: none;
-      border-color: rgb(255 255 255 / 0.3);
-      box-shadow: inset 0 1px 0 0 rgb(226 244 255 / 0.4),
-        inset 0 -1px 0 0 rgb(255 226 232 / 0.16), 0 26px 56px -28px rgb(0 0 0 / 1);
+      border-color: rgb(var(--c-accent) / 0.9);
+      box-shadow: none;
     }
   }
 
